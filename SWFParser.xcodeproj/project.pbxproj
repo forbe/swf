@@ -1,0 +1,414 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		871B675C150CF55B002DFA87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B675B150CF55B002DFA87 /* UIKit.framework */; };
+		871B675E150CF55B002DFA87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B675D150CF55B002DFA87 /* Foundation.framework */; };
+		871B6760150CF55B002DFA87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B675F150CF55B002DFA87 /* CoreGraphics.framework */; };
+		871B6766150CF55B002DFA87 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 871B6764150CF55B002DFA87 /* InfoPlist.strings */; };
+		871B6768150CF55B002DFA87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 871B6767150CF55B002DFA87 /* main.m */; };
+		871B676C150CF55C002DFA87 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 871B676B150CF55C002DFA87 /* AppDelegate.mm */; };
+		871B676F150CF55C002DFA87 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 871B676D150CF55C002DFA87 /* MainStoryboard.storyboard */; };
+		871B6772150CF55C002DFA87 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 871B6771150CF55C002DFA87 /* ViewController.mm */; };
+		871B677D150CF56E002DFA87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B675D150CF55B002DFA87 /* Foundation.framework */; };
+		87606D971511019E002A1782 /* libswf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B677C150CF56E002DFA87 /* libswf.a */; };
+		87606D9815114B01002A1782 /* swf.h in Headers */ = {isa = PBXBuildFile; fileRef = 871B6781150CF56E002DFA87 /* swf.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		87606D9915114B01002A1782 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 87606D931511000A002A1782 /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		87606D9B15114B60002A1782 /* swf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87606D9A15114B60002A1782 /* swf.cpp */; };
+		87BE82A015115ED600128FD1 /* ball.swf in Resources */ = {isa = PBXBuildFile; fileRef = 87BE829F15115ED500128FD1 /* ball.swf */; };
+		87BE82A315117D9E00128FD1 /* read_bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87BE82A215117D9E00128FD1 /* read_bits.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		87606D951511019A002A1782 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 871B674E150CF55B002DFA87 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 871B677B150CF56E002DFA87;
+			remoteInfo = swf;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		871B6757150CF55B002DFA87 /* SWFParser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWFParser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		871B675B150CF55B002DFA87 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		871B675D150CF55B002DFA87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		871B675F150CF55B002DFA87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		871B6763150CF55B002DFA87 /* SWFParser-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SWFParser-Info.plist"; sourceTree = "<group>"; };
+		871B6765150CF55B002DFA87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		871B6767150CF55B002DFA87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		871B6769150CF55C002DFA87 /* SWFParser-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SWFParser-Prefix.pch"; sourceTree = "<group>"; };
+		871B676A150CF55C002DFA87 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		871B676B150CF55C002DFA87 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		871B676E150CF55C002DFA87 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		871B6770150CF55C002DFA87 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		871B6771150CF55C002DFA87 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		871B677C150CF56E002DFA87 /* libswf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libswf.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		871B6781150CF56E002DFA87 /* swf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = swf.h; sourceTree = "<group>"; };
+		87606D931511000A002A1782 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		87606D9A15114B60002A1782 /* swf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = swf.cpp; sourceTree = "<group>"; };
+		87BE829F15115ED500128FD1 /* ball.swf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball.swf; sourceTree = "<group>"; };
+		87BE82A215117D9E00128FD1 /* read_bits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = read_bits.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		871B6754150CF55B002DFA87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87606D971511019E002A1782 /* libswf.a in Frameworks */,
+				871B675C150CF55B002DFA87 /* UIKit.framework in Frameworks */,
+				871B675E150CF55B002DFA87 /* Foundation.framework in Frameworks */,
+				871B6760150CF55B002DFA87 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		871B6779150CF56E002DFA87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				871B677D150CF56E002DFA87 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		871B674C150CF55B002DFA87 = {
+			isa = PBXGroup;
+			children = (
+				871B6761150CF55B002DFA87 /* SWFParser */,
+				871B677E150CF56E002DFA87 /* swf */,
+				871B675A150CF55B002DFA87 /* Frameworks */,
+				871B6758150CF55B002DFA87 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		871B6758150CF55B002DFA87 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				871B6757150CF55B002DFA87 /* SWFParser.app */,
+				871B677C150CF56E002DFA87 /* libswf.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		871B675A150CF55B002DFA87 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				871B675B150CF55B002DFA87 /* UIKit.framework */,
+				871B675D150CF55B002DFA87 /* Foundation.framework */,
+				871B675F150CF55B002DFA87 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		871B6761150CF55B002DFA87 /* SWFParser */ = {
+			isa = PBXGroup;
+			children = (
+				87BE829F15115ED500128FD1 /* ball.swf */,
+				871B676A150CF55C002DFA87 /* AppDelegate.h */,
+				871B676B150CF55C002DFA87 /* AppDelegate.mm */,
+				871B676D150CF55C002DFA87 /* MainStoryboard.storyboard */,
+				871B6770150CF55C002DFA87 /* ViewController.h */,
+				871B6771150CF55C002DFA87 /* ViewController.mm */,
+				871B6762150CF55B002DFA87 /* Supporting Files */,
+			);
+			path = SWFParser;
+			sourceTree = "<group>";
+		};
+		871B6762150CF55B002DFA87 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				871B6763150CF55B002DFA87 /* SWFParser-Info.plist */,
+				871B6764150CF55B002DFA87 /* InfoPlist.strings */,
+				871B6767150CF55B002DFA87 /* main.m */,
+				871B6769150CF55C002DFA87 /* SWFParser-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		871B677E150CF56E002DFA87 /* swf */ = {
+			isa = PBXGroup;
+			children = (
+				871B6781150CF56E002DFA87 /* swf.h */,
+				87606D9A15114B60002A1782 /* swf.cpp */,
+				87606D931511000A002A1782 /* types.h */,
+				87BE82A215117D9E00128FD1 /* read_bits.cpp */,
+			);
+			path = swf;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		871B677A150CF56E002DFA87 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87606D9815114B01002A1782 /* swf.h in Headers */,
+				87606D9915114B01002A1782 /* types.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		871B6756150CF55B002DFA87 /* SWFParser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 871B6775150CF55C002DFA87 /* Build configuration list for PBXNativeTarget "SWFParser" */;
+			buildPhases = (
+				871B6753150CF55B002DFA87 /* Sources */,
+				871B6754150CF55B002DFA87 /* Frameworks */,
+				871B6755150CF55B002DFA87 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				87606D961511019A002A1782 /* PBXTargetDependency */,
+			);
+			name = SWFParser;
+			productName = SWFParser;
+			productReference = 871B6757150CF55B002DFA87 /* SWFParser.app */;
+			productType = "com.apple.product-type.application";
+		};
+		871B677B150CF56E002DFA87 /* swf */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 871B6784150CF56E002DFA87 /* Build configuration list for PBXNativeTarget "swf" */;
+			buildPhases = (
+				871B6778150CF56E002DFA87 /* Sources */,
+				871B6779150CF56E002DFA87 /* Frameworks */,
+				871B677A150CF56E002DFA87 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = swf;
+			productName = swf;
+			productReference = 871B677C150CF56E002DFA87 /* libswf.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		871B674E150CF55B002DFA87 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 871B6751150CF55B002DFA87 /* Build configuration list for PBXProject "SWFParser" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 871B674C150CF55B002DFA87;
+			productRefGroup = 871B6758150CF55B002DFA87 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				871B6756150CF55B002DFA87 /* SWFParser */,
+				871B677B150CF56E002DFA87 /* swf */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		871B6755150CF55B002DFA87 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				871B6766150CF55B002DFA87 /* InfoPlist.strings in Resources */,
+				871B676F150CF55C002DFA87 /* MainStoryboard.storyboard in Resources */,
+				87BE82A015115ED600128FD1 /* ball.swf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		871B6753150CF55B002DFA87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				871B6768150CF55B002DFA87 /* main.m in Sources */,
+				871B676C150CF55C002DFA87 /* AppDelegate.mm in Sources */,
+				871B6772150CF55C002DFA87 /* ViewController.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		871B6778150CF56E002DFA87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87606D9B15114B60002A1782 /* swf.cpp in Sources */,
+				87BE82A315117D9E00128FD1 /* read_bits.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		87606D961511019A002A1782 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 871B677B150CF56E002DFA87 /* swf */;
+			targetProxy = 87606D951511019A002A1782 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		871B6764150CF55B002DFA87 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				871B6765150CF55B002DFA87 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		871B676D150CF55C002DFA87 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				871B676E150CF55C002DFA87 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		871B6773150CF55C002DFA87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		871B6774150CF55C002DFA87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		871B6776150CF55C002DFA87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SWFParser/SWFParser-Prefix.pch";
+				INFOPLIST_FILE = "SWFParser/SWFParser-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		871B6777150CF55C002DFA87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SWFParser/SWFParser-Prefix.pch";
+				INFOPLIST_FILE = "SWFParser/SWFParser-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		871B6785150CF56E002DFA87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/swf.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		871B6786150CF56E002DFA87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/swf.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		871B6751150CF55B002DFA87 /* Build configuration list for PBXProject "SWFParser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				871B6773150CF55C002DFA87 /* Debug */,
+				871B6774150CF55C002DFA87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		871B6775150CF55C002DFA87 /* Build configuration list for PBXNativeTarget "SWFParser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				871B6776150CF55C002DFA87 /* Debug */,
+				871B6777150CF55C002DFA87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		871B6784150CF56E002DFA87 /* Build configuration list for PBXNativeTarget "swf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				871B6785150CF56E002DFA87 /* Debug */,
+				871B6786150CF56E002DFA87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 871B674E150CF55B002DFA87 /* Project object */;
+}
