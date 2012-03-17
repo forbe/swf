@@ -41,6 +41,30 @@ namespace swf
 		return st;
 	}
 	
+	struct TagHeader {
+		uint tag;
+		UI16 length;
+		UI32 length_extended;
+	};
+	
+	streamsize skip_size(const TagHeader &h) {
+		return (streamsize)(h.length_extended ? h.length_extended : h.length);
+	}
+	
+	std::istream &operator>>(std::istream &st, TagHeader &header) {
+		UI16 tag_and_length;
+		st.read((char *)&tag_and_length, sizeof(UI16));
+		header.tag = tag_and_length >> 6;
+		header.length =  tag_and_length & ((1 << 6)-1);
+		header.length_extended = 0;
+		if (header.length == 63) {
+			UI32 lext;
+			st.read((char *)&lext, sizeof(UI32));
+			header.length_extended = lext;
+		}
+		return st;
+	}
+	
 	enum tag_id
 	{
 		End = 0 ,

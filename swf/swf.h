@@ -15,9 +15,10 @@ using namespace std;
 
 namespace swf
 {
-	//typedef void *(parse_tag_fun)(istream &);
+	void parse_tag_no_impl(istream &s) { throw "not implemented"; }
 	
-	//static parse_tag_fun tag_parser[91];
+	typedef void (*parse_tag_fun)(istream &);
+	static void (*tag_parser[91])(istream &) = { 0 };
 	
 	struct SWF
 	{
@@ -47,6 +48,23 @@ namespace swf
 		cout << frame_size;
 		READ(frame_rate);
 		READ(frame_count);
-		cout << "FRAME RATE:" << frame_rate << endl << "FRAME COUNT" << frame_count << endl;
+		cout << "FRAME RATE:" << frame_rate << endl << "FRAME COUNT:" << frame_count << endl;
+		
+		while (f.good()) {
+			
+			TagHeader header;
+			f >> header;
+			
+			parse_tag_fun &p = tag_parser[header.tag];
+			if (!p) {
+				cout << "TAG NOT IMPLEMENTED:" << int(header.tag) << endl;
+				streamsize off = skip_size(header);
+				f.seekg((streamsize)f.tellg()+off);
+				//f.ignore(off); // this shitty function doesn't work, I wonder why.
+			}
+		}
 	}
+	
+	// tags
+	
 }
