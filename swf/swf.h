@@ -15,10 +15,19 @@ using namespace std;
 
 namespace swf
 {
-	void parse_tag_no_impl(istream &s) { throw "not implemented"; }
+	struct SWF;
 	
-	typedef void (*parse_tag_fun)(istream &);
-	static void (*tag_parser[91])(istream &) = { 0 };
+	typedef void (*parse_tag_fun)(istream &, SWF &swf);
+	static void (*tag_parser[91])(istream &, SWF &swf) = { 0 };
+	
+	template <class T>
+	static void read(istream &stream, T &target) {
+		stream.read((char *)&target, sizeof(T));
+	}
+	
+	static void register_parser(tag_id tag, parse_tag_fun f) {
+		tag_parser[tag] = f;
+	}
 	
 	struct SWF
 	{
@@ -52,7 +61,7 @@ namespace swf
 		
 		while (f.good()) {
 			
-			TagHeader header;
+			RECORDHEADER header;
 			f >> header;
 			
 			parse_tag_fun &p = tag_parser[header.tag];
@@ -61,10 +70,28 @@ namespace swf
 				streamsize off = skip_size(header);
 				f.seekg((streamsize)f.tellg()+off);
 				//f.ignore(off); // this shitty function doesn't work, I wonder why.
+			} else {
+				streampos start_pos = f.tellg();
+				p(f, result);
+				// check that the parser consumed all the required data
+				assert((f.tellg()-start_pos == skip_size(header)));
 			}
 		}
 	}
 	
 	// tags
 	
+	void define_shape(istream &s, SWF &swf) {
+		cout << "DEFINE SHAPE" << endl;
+		UI16 shape_id;
+		RECT shape_bounds;
+		read(s, shape_id);
+		s >> shape_bounds;
+		cout << "ok" << endl;
+	}
+	
+	static void init_tag_parsers() {
+		register_parser(DefineShape, &define_shape);
+		
+	}
 }

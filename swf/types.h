@@ -13,9 +13,9 @@
 
 namespace swf 
 {
-	typedef char	SI8;
-	typedef short	SI16;
-	typedef int		SI32;
+	typedef char			SI8;
+	typedef short			SI16;
+	typedef int				SI32;
 	typedef unsigned char	UI8;
 	typedef unsigned short	UI16;
 	typedef unsigned int	UI32;
@@ -29,10 +29,14 @@ namespace swf
 	std::istream &operator>>(std::istream &st, RECT &rect) {
 		BitReader<UI8> r(st);
 		r.read(rect.nbits, 5);
-		r.read(rect.x_min, rect.nbits);
-		r.read(rect.x_max, rect.nbits);
-		r.read(rect.y_min, rect.nbits);
-		r.read(rect.y_max, rect.nbits);
+		r.read_signed(rect.x_min, rect.nbits);
+		r.read_signed(rect.x_max, rect.nbits);
+		r.read_signed(rect.y_min, rect.nbits);
+		r.read_signed(rect.y_max, rect.nbits);
+		/*rect.x_min /= 20;
+		rect.x_max /= 20;
+		rect.y_min /= 20;
+		rect.y_max /= 20;*/
 		return st;
 	}
 	
@@ -41,17 +45,17 @@ namespace swf
 		return st;
 	}
 	
-	struct TagHeader {
+	struct RECORDHEADER {
 		uint tag;
 		UI16 length;
 		UI32 length_extended;
 	};
 	
-	streamsize skip_size(const TagHeader &h) {
+	streamsize skip_size(const RECORDHEADER &h) {
 		return (streamsize)(h.length_extended ? h.length_extended : h.length);
 	}
 	
-	std::istream &operator>>(std::istream &st, TagHeader &header) {
+	std::istream &operator>>(std::istream &st, RECORDHEADER &header) {
 		UI16 tag_and_length;
 		st.read((char *)&tag_and_length, sizeof(UI16));
 		header.tag = tag_and_length >> 6;

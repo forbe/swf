@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include <limits>
 
 using namespace std;
 
@@ -22,6 +23,7 @@ public:
 	BitReader(istream &input) : input(input), type_size(sizeof(T)*8), off(0) {
 		off = type_size;
 	}
+	
 	template <class U>
 	void read(U &dest, size_t length) {
 		dest = 0;
@@ -40,22 +42,25 @@ public:
 			dest <<= to_read;
 			
 			T val = cur;
-			// discard right of zone
-			T too_much = type_size-(off+to_read);
-			val >>= too_much;
+			val >>= type_size-(off+to_read);
 			T mask = (1 << to_read)-1;
 			val &= mask;
 			dest |= val;
-			//memcpy(dest_p, &val, sizeof(U));
 			
 			off += to_read;
 			left -= to_read;
-			//dest_p += to_read;
-			//cur <<= to_read;
 		}
 	}
 	
-	void skip(int length) {
-		
+	template <class U>
+	void read_signed(U &dest, size_t length) {
+		read(dest, length);
+		bool neg = dest & (1 << (length-1));
+		if (neg) {
+			// extend the sign
+			U mask = std::numeric_limits<U>::max();
+			mask <<= length;
+			dest |= mask;
+		}
 	}
 };
