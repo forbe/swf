@@ -10,6 +10,7 @@
 #include <fstream>
 #include <istream>
 #include "types.h"
+#include <map>
 
 using namespace std;
 
@@ -31,7 +32,8 @@ namespace swf
 	
 	struct SWF
 	{
-		
+		UI8 version;
+		map<UI16, void *> dictionary;
 	};
 
 	void parse(istream &f, SWF &result) 
@@ -53,6 +55,9 @@ namespace swf
 		cout << "VERSION:" << int(version) << endl;
 		READ(file_length);
 		cout << "FILE LENGTH:" << file_length << endl;
+		
+		assert(sig[0] == 'F'); // compressed swf not supported yet
+		
 		f >> frame_size;
 		cout << frame_size;
 		READ(frame_rate);
@@ -87,11 +92,30 @@ namespace swf
 		RECT shape_bounds;
 		read(s, shape_id);
 		s >> shape_bounds;
-		cout << "ok" << endl;
+	}
+	
+	void define_shape_4(istream &s, SWF &swf) {
+		UI16 shape_id;
+		RECT shape_bounds;
+		RECT edge_bounds;
+		UI8 reserved, uses_fill_winding_rule, uses_non_scaling_strokes, uses_scaling_strokes;
+	}
+	
+	void file_attributes(istream &s, SWF &swf) {
+		BitReader<UI8> reader(s);
+		UI8 reserved, use_direct_blit, use_gpu, has_metadata, as3, use_network;
+		reader.read(reserved, 1);
+		reader.read(use_direct_blit, 1);
+		reader.read(use_gpu, 1);
+		reader.read(has_metadata, 1);
+		reader.read(as3, 1);
+		reader.read(reserved, 2);
+		reader.read(use_network, 1);
+		reader.read(reserved, 24);
 	}
 	
 	static void init_tag_parsers() {
 		register_parser(DefineShape, &define_shape);
-		
+		register_parser(DefineShape4, &define_shape_4);
 	}
 }

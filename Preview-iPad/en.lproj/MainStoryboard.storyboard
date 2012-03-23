@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50b" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="jTE-aE-AUF">
+    <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
+        <development defaultVersion="4200" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1179"/>
+    </dependencies>
+    <scenes>
+        <!--Documents Table View Controller - Documents-->
+        <scene sceneID="0q2-JM-nsI">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MpS-vK-Vbz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="swk-JS-8tl" customClass="DocumentsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PQe-7f-KRj">
+                        <rect key="frame" x="0.0" y="64" width="320" height="704"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="NsU-sB-C8w">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="swk-JS-8tl" id="0oT-Ac-Nkl"/>
+                            <outlet property="delegate" destination="swk-JS-8tl" id="1P3-d6-Kb5"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Documents" id="pcG-Jd-qWk"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="259" y="-1339"/>
+        </scene>
+        <!--GLKit View Controller-->
+        <scene sceneID="uS8-xI-03R">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IML-dF-Jur" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <glkViewController autoresizesArchivedViewToFullSize="NO" preferredFramesPerSecond="30" id="pab-dY-b5J" customClass="SWFViewController" sceneMemberID="viewController">
+                    <glkView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Pmm-Y1-3a6">
+                        <rect key="frame" x="0.0" y="20" width="703" height="748"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <connections>
+                            <outlet property="delegate" destination="pab-dY-b5J" id="xfZ-Ci-ZYQ"/>
+                        </connections>
+                    </glkView>
+                </glkViewController>
+            </objects>
+            <point key="canvasLocation" x="-297" y="-357"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7NA-1F-Jdp">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4p8-XX-tM9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="Qd7-ov-sM9" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="UOO-xP-1cZ">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="swk-JS-8tl" kind="relationship" relationship="rootViewController" id="Hh4-2z-rHb"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-275" y="-1339"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="a9x-0f-czy">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w8v-BV-RsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <splitViewController id="jTE-aE-AUF" customClass="ViewController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <segue destination="Qd7-ov-sM9" kind="relationship" relationship="masterViewController" id="0Ra-Oa-FIB"/>
+                        <segue destination="pab-dY-b5J" kind="relationship" relationship="detailViewController" id="czJ-nS-leu"/>
+                    </connections>
+                </splitViewController>
+            </objects>
+            <point key="canvasLocation" x="-1569" y="-914"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

@@ -7,64 +7,66 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		871B675C150CF55B002DFA87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B675B150CF55B002DFA87 /* UIKit.framework */; };
-		871B675E150CF55B002DFA87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B675D150CF55B002DFA87 /* Foundation.framework */; };
-		871B6760150CF55B002DFA87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B675F150CF55B002DFA87 /* CoreGraphics.framework */; };
-		871B6766150CF55B002DFA87 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 871B6764150CF55B002DFA87 /* InfoPlist.strings */; };
-		871B6768150CF55B002DFA87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 871B6767150CF55B002DFA87 /* main.m */; };
-		871B676C150CF55C002DFA87 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 871B676B150CF55C002DFA87 /* AppDelegate.mm */; };
-		871B676F150CF55C002DFA87 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 871B676D150CF55C002DFA87 /* MainStoryboard.storyboard */; };
-		871B6772150CF55C002DFA87 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 871B6771150CF55C002DFA87 /* ViewController.mm */; };
+		87190C7E151C341D0013BE31 /* shape.h in Headers */ = {isa = PBXBuildFile; fileRef = 87190C7D151C341D0013BE31 /* shape.h */; };
+		87190CA6151D36570013BE31 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B675B150CF55B002DFA87 /* UIKit.framework */; };
+		87190CA7151D36570013BE31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B675D150CF55B002DFA87 /* Foundation.framework */; };
+		87190CA8151D36570013BE31 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B675F150CF55B002DFA87 /* CoreGraphics.framework */; };
+		87190CAE151D36570013BE31 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 87190CAC151D36570013BE31 /* InfoPlist.strings */; };
+		87190CB0151D36570013BE31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87190CAF151D36570013BE31 /* main.m */; };
+		87190CB4151D36570013BE31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87190CB3151D36570013BE31 /* AppDelegate.m */; };
+		87190CB7151D36570013BE31 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87190CB5151D36570013BE31 /* MainStoryboard.storyboard */; };
+		87190CBA151D36570013BE31 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87190CB9151D36570013BE31 /* ViewController.m */; };
+		87190CBF151D36FA0013BE31 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87190CBE151D36FA0013BE31 /* GLKit.framework */; };
+		87190CC1151D37000013BE31 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87190CC0151D37000013BE31 /* OpenGLES.framework */; };
+		87190CCD151D3D350013BE31 /* SWFViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 87190CCC151D3D350013BE31 /* SWFViewController.mm */; };
 		871B677D150CF56E002DFA87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B675D150CF55B002DFA87 /* Foundation.framework */; };
-		87606D971511019E002A1782 /* libswf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B677C150CF56E002DFA87 /* libswf.a */; };
 		87606D9815114B01002A1782 /* swf.h in Headers */ = {isa = PBXBuildFile; fileRef = 871B6781150CF56E002DFA87 /* swf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		87606D9915114B01002A1782 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 87606D931511000A002A1782 /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		87606D9B15114B60002A1782 /* swf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87606D9A15114B60002A1782 /* swf.cpp */; };
-		87BE82A015115ED600128FD1 /* ball.swf in Resources */ = {isa = PBXBuildFile; fileRef = 87BE829F15115ED500128FD1 /* ball.swf */; };
+		87733887151D414A0012CE91 /* DocumentsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 87733886151D414A0012CE91 /* DocumentsTableViewController.mm */; };
+		87733888151D46DC0012CE91 /* libswf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B677C150CF56E002DFA87 /* libswf.a */; };
 		87BE82A315117D9E00128FD1 /* read_bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87BE82A215117D9E00128FD1 /* read_bits.cpp */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		87606D951511019A002A1782 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 871B674E150CF55B002DFA87 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 871B677B150CF56E002DFA87;
-			remoteInfo = swf;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		871B6757150CF55B002DFA87 /* SWFParser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWFParser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		87190C7D151C341D0013BE31 /* shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shape.h; sourceTree = "<group>"; };
+		87190CA4151D36570013BE31 /* Preview-iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Preview-iPad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		87190CAB151D36570013BE31 /* Preview-iPad-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Preview-iPad-Info.plist"; sourceTree = "<group>"; };
+		87190CAD151D36570013BE31 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		87190CAF151D36570013BE31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		87190CB1151D36570013BE31 /* Preview-iPad-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Preview-iPad-Prefix.pch"; sourceTree = "<group>"; };
+		87190CB2151D36570013BE31 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		87190CB3151D36570013BE31 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		87190CB6151D36570013BE31 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		87190CB8151D36570013BE31 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		87190CB9151D36570013BE31 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		87190CBE151D36FA0013BE31 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		87190CC0151D37000013BE31 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		87190CCB151D3D350013BE31 /* SWFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWFViewController.h; sourceTree = "<group>"; };
+		87190CCC151D3D350013BE31 /* SWFViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SWFViewController.mm; sourceTree = "<group>"; };
 		871B675B150CF55B002DFA87 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		871B675D150CF55B002DFA87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		871B675F150CF55B002DFA87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		871B6763150CF55B002DFA87 /* SWFParser-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SWFParser-Info.plist"; sourceTree = "<group>"; };
-		871B6765150CF55B002DFA87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		871B6767150CF55B002DFA87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		871B6769150CF55C002DFA87 /* SWFParser-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SWFParser-Prefix.pch"; sourceTree = "<group>"; };
-		871B676A150CF55C002DFA87 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		871B676B150CF55C002DFA87 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
-		871B676E150CF55C002DFA87 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		871B6770150CF55C002DFA87 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		871B6771150CF55C002DFA87 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		871B677C150CF56E002DFA87 /* libswf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libswf.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		871B6781150CF56E002DFA87 /* swf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = swf.h; sourceTree = "<group>"; };
 		87606D931511000A002A1782 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 		87606D9A15114B60002A1782 /* swf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = swf.cpp; sourceTree = "<group>"; };
-		87BE829F15115ED500128FD1 /* ball.swf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball.swf; sourceTree = "<group>"; };
+		87733885151D414A0012CE91 /* DocumentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentsTableViewController.h; sourceTree = "<group>"; };
+		87733886151D414A0012CE91 /* DocumentsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DocumentsTableViewController.mm; sourceTree = "<group>"; };
 		87BE82A215117D9E00128FD1 /* read_bits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = read_bits.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		871B6754150CF55B002DFA87 /* Frameworks */ = {
+		87190CA1151D36570013BE31 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87606D971511019E002A1782 /* libswf.a in Frameworks */,
-				871B675C150CF55B002DFA87 /* UIKit.framework in Frameworks */,
-				871B675E150CF55B002DFA87 /* Foundation.framework in Frameworks */,
-				871B6760150CF55B002DFA87 /* CoreGraphics.framework in Frameworks */,
+				87733888151D46DC0012CE91 /* libswf.a in Frameworks */,
+				87190CC1151D37000013BE31 /* OpenGLES.framework in Frameworks */,
+				87190CBF151D36FA0013BE31 /* GLKit.framework in Frameworks */,
+				87190CA6151D36570013BE31 /* UIKit.framework in Frameworks */,
+				87190CA7151D36570013BE31 /* Foundation.framework in Frameworks */,
+				87190CA8151D36570013BE31 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,11 +81,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		87190CA9151D36570013BE31 /* Preview-iPad */ = {
+			isa = PBXGroup;
+			children = (
+				87190CB2151D36570013BE31 /* AppDelegate.h */,
+				87190CB3151D36570013BE31 /* AppDelegate.m */,
+				87190CB5151D36570013BE31 /* MainStoryboard.storyboard */,
+				87190CB8151D36570013BE31 /* ViewController.h */,
+				87190CB9151D36570013BE31 /* ViewController.m */,
+				87190CAA151D36570013BE31 /* Supporting Files */,
+				87190CCB151D3D350013BE31 /* SWFViewController.h */,
+				87190CCC151D3D350013BE31 /* SWFViewController.mm */,
+				87733885151D414A0012CE91 /* DocumentsTableViewController.h */,
+				87733886151D414A0012CE91 /* DocumentsTableViewController.mm */,
+			);
+			path = "Preview-iPad";
+			sourceTree = "<group>";
+		};
+		87190CAA151D36570013BE31 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				87190CAB151D36570013BE31 /* Preview-iPad-Info.plist */,
+				87190CAC151D36570013BE31 /* InfoPlist.strings */,
+				87190CAF151D36570013BE31 /* main.m */,
+				87190CB1151D36570013BE31 /* Preview-iPad-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		871B674C150CF55B002DFA87 = {
 			isa = PBXGroup;
 			children = (
-				871B6761150CF55B002DFA87 /* SWFParser */,
 				871B677E150CF56E002DFA87 /* swf */,
+				87190CA9151D36570013BE31 /* Preview-iPad */,
 				871B675A150CF55B002DFA87 /* Frameworks */,
 				871B6758150CF55B002DFA87 /* Products */,
 			);
@@ -92,8 +122,8 @@
 		871B6758150CF55B002DFA87 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				871B6757150CF55B002DFA87 /* SWFParser.app */,
 				871B677C150CF56E002DFA87 /* libswf.a */,
+				87190CA4151D36570013BE31 /* Preview-iPad.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,36 +131,13 @@
 		871B675A150CF55B002DFA87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				87190CC0151D37000013BE31 /* OpenGLES.framework */,
+				87190CBE151D36FA0013BE31 /* GLKit.framework */,
 				871B675B150CF55B002DFA87 /* UIKit.framework */,
 				871B675D150CF55B002DFA87 /* Foundation.framework */,
 				871B675F150CF55B002DFA87 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		871B6761150CF55B002DFA87 /* SWFParser */ = {
-			isa = PBXGroup;
-			children = (
-				87BE829F15115ED500128FD1 /* ball.swf */,
-				871B676A150CF55C002DFA87 /* AppDelegate.h */,
-				871B676B150CF55C002DFA87 /* AppDelegate.mm */,
-				871B676D150CF55C002DFA87 /* MainStoryboard.storyboard */,
-				871B6770150CF55C002DFA87 /* ViewController.h */,
-				871B6771150CF55C002DFA87 /* ViewController.mm */,
-				871B6762150CF55B002DFA87 /* Supporting Files */,
-			);
-			path = SWFParser;
-			sourceTree = "<group>";
-		};
-		871B6762150CF55B002DFA87 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				871B6763150CF55B002DFA87 /* SWFParser-Info.plist */,
-				871B6764150CF55B002DFA87 /* InfoPlist.strings */,
-				871B6767150CF55B002DFA87 /* main.m */,
-				871B6769150CF55C002DFA87 /* SWFParser-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		871B677E150CF56E002DFA87 /* swf */ = {
@@ -140,6 +147,7 @@
 				87606D9A15114B60002A1782 /* swf.cpp */,
 				87606D931511000A002A1782 /* types.h */,
 				87BE82A215117D9E00128FD1 /* read_bits.cpp */,
+				87190C7D151C341D0013BE31 /* shape.h */,
 			);
 			path = swf;
 			sourceTree = "<group>";
@@ -153,28 +161,28 @@
 			files = (
 				87606D9815114B01002A1782 /* swf.h in Headers */,
 				87606D9915114B01002A1782 /* types.h in Headers */,
+				87190C7E151C341D0013BE31 /* shape.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		871B6756150CF55B002DFA87 /* SWFParser */ = {
+		87190CA3151D36570013BE31 /* Preview-iPad */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 871B6775150CF55C002DFA87 /* Build configuration list for PBXNativeTarget "SWFParser" */;
+			buildConfigurationList = 87190CBB151D36570013BE31 /* Build configuration list for PBXNativeTarget "Preview-iPad" */;
 			buildPhases = (
-				871B6753150CF55B002DFA87 /* Sources */,
-				871B6754150CF55B002DFA87 /* Frameworks */,
-				871B6755150CF55B002DFA87 /* Resources */,
+				87190CA0151D36570013BE31 /* Sources */,
+				87190CA1151D36570013BE31 /* Frameworks */,
+				87190CA2151D36570013BE31 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				87606D961511019A002A1782 /* PBXTargetDependency */,
 			);
-			name = SWFParser;
-			productName = SWFParser;
-			productReference = 871B6757150CF55B002DFA87 /* SWFParser.app */;
+			name = "Preview-iPad";
+			productName = "Preview-iPad";
+			productReference = 87190CA4151D36570013BE31 /* Preview-iPad.app */;
 			productType = "com.apple.product-type.application";
 		};
 		871B677B150CF56E002DFA87 /* swf */ = {
@@ -214,33 +222,34 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				871B6756150CF55B002DFA87 /* SWFParser */,
 				871B677B150CF56E002DFA87 /* swf */,
+				87190CA3151D36570013BE31 /* Preview-iPad */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		871B6755150CF55B002DFA87 /* Resources */ = {
+		87190CA2151D36570013BE31 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				871B6766150CF55B002DFA87 /* InfoPlist.strings in Resources */,
-				871B676F150CF55C002DFA87 /* MainStoryboard.storyboard in Resources */,
-				87BE82A015115ED600128FD1 /* ball.swf in Resources */,
+				87190CAE151D36570013BE31 /* InfoPlist.strings in Resources */,
+				87190CB7151D36570013BE31 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		871B6753150CF55B002DFA87 /* Sources */ = {
+		87190CA0151D36570013BE31 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				871B6768150CF55B002DFA87 /* main.m in Sources */,
-				871B676C150CF55C002DFA87 /* AppDelegate.mm in Sources */,
-				871B6772150CF55C002DFA87 /* ViewController.mm in Sources */,
+				87190CB0151D36570013BE31 /* main.m in Sources */,
+				87190CB4151D36570013BE31 /* AppDelegate.m in Sources */,
+				87190CBA151D36570013BE31 /* ViewController.m in Sources */,
+				87190CCD151D3D350013BE31 /* SWFViewController.mm in Sources */,
+				87733887151D414A0012CE91 /* DocumentsTableViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,27 +264,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		87606D961511019A002A1782 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 871B677B150CF56E002DFA87 /* swf */;
-			targetProxy = 87606D951511019A002A1782 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		871B6764150CF55B002DFA87 /* InfoPlist.strings */ = {
+		87190CAC151D36570013BE31 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				871B6765150CF55B002DFA87 /* en */,
+				87190CAD151D36570013BE31 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		871B676D150CF55C002DFA87 /* MainStoryboard.storyboard */ = {
+		87190CB5151D36570013BE31 /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				871B676E150CF55C002DFA87 /* en */,
+				87190CB6151D36570013BE31 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -283,6 +284,32 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		87190CBC151D36570013BE31 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Preview-iPad/Preview-iPad-Prefix.pch";
+				INFOPLIST_FILE = "Preview-iPad/Preview-iPad-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		87190CBD151D36570013BE31 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Preview-iPad/Preview-iPad-Prefix.pch";
+				INFOPLIST_FILE = "Preview-iPad/Preview-iPad-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		871B6773150CF55C002DFA87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -332,28 +359,6 @@
 			};
 			name = Release;
 		};
-		871B6776150CF55C002DFA87 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SWFParser/SWFParser-Prefix.pch";
-				INFOPLIST_FILE = "SWFParser/SWFParser-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		871B6777150CF55C002DFA87 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SWFParser/SWFParser-Prefix.pch";
-				INFOPLIST_FILE = "SWFParser/SWFParser-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
 		871B6785150CF56E002DFA87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -381,20 +386,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		87190CBB151D36570013BE31 /* Build configuration list for PBXNativeTarget "Preview-iPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87190CBC151D36570013BE31 /* Debug */,
+				87190CBD151D36570013BE31 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		871B6751150CF55B002DFA87 /* Build configuration list for PBXProject "SWFParser" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				871B6773150CF55C002DFA87 /* Debug */,
 				871B6774150CF55C002DFA87 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		871B6775150CF55C002DFA87 /* Build configuration list for PBXNativeTarget "SWFParser" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				871B6776150CF55C002DFA87 /* Debug */,
-				871B6777150CF55C002DFA87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

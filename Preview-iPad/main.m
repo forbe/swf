@@ -1,8 +1,8 @@
 //
 //  main.m
-//  SWFParser
+//  Preview-iPad
 //
-//  Created by Simon Harvey on 12-03-11.
+//  Created by Simon Harvey on 12-03-23.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
