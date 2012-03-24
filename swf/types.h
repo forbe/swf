@@ -37,11 +37,21 @@ namespace swf
 		return st;
 	}
 	
-	std::ostream &operator<<(std::ostream &st, const RECT &rect) 
+	struct RGB 
 	{
-		st << int(rect.nbits) << endl;
-		return st;
-	}
+		UI8 r, g, b;
+	};
+	
+	struct RGBA
+	{
+		UI8 r, g, b, a;
+	};
+	
+	struct MATRIX
+	{
+		bool has_scale;
+		UI8 scale_x, scale_y;
+	};
 	
 	struct RECORDHEADER 
 	{

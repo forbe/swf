@@ -34,6 +34,7 @@ namespace swf
 	{
 		UI8 version;
 		map<UI16, void *> dictionary;
+		RECT frame_size;
 	};
 
 	void parse(istream &f, SWF &result) 
@@ -47,7 +48,6 @@ namespace swf
 		UI8 sig[4] = {0};
 		UI8 version;
 		UI32 file_length;
-		RECT frame_size;
 		UI16 frame_rate, frame_count;
 		READ_S(sig, 3);
 		cout << "SIGNATURE:" << sig << endl;
@@ -58,8 +58,7 @@ namespace swf
 		
 		assert(sig[0] == 'F'); // compressed swf not supported yet
 		
-		f >> frame_size;
-		cout << frame_size;
+		f >> result.frame_size;
 		READ(frame_rate);
 		READ(frame_count);
 		cout << "FRAME RATE:" << frame_rate << endl << "FRAME COUNT:" << frame_count << endl;
@@ -112,6 +111,7 @@ namespace swf
 		RECT shape_bounds;
 		RECT edge_bounds;
 		UI8 reserved, uses_fill_winding_rule, uses_non_scaling_strokes, uses_scaling_strokes;
+		swf.dictionary[shape_id] = NULL;
 	}
 	
 	void file_attributes(istream &s, SWF &swf) {
@@ -130,7 +130,7 @@ namespace swf
 	static void init_tag_parsers() {
 		register_parser(End, &end);
 		register_parser(ShowFrame, &show_frame);
-		//register_parser(DefineShape, &define_shape);
+		register_parser(DefineShape, &define_shape);
 		register_parser(DefineShape4, &define_shape_4);
 	}
 }

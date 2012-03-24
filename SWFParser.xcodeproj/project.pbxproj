@@ -13,9 +13,9 @@
 		87190CA8151D36570013BE31 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B675F150CF55B002DFA87 /* CoreGraphics.framework */; };
 		87190CAE151D36570013BE31 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 87190CAC151D36570013BE31 /* InfoPlist.strings */; };
 		87190CB0151D36570013BE31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87190CAF151D36570013BE31 /* main.m */; };
-		87190CB4151D36570013BE31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87190CB3151D36570013BE31 /* AppDelegate.m */; };
+		87190CB4151D36570013BE31 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 87190CB3151D36570013BE31 /* AppDelegate.mm */; };
 		87190CB7151D36570013BE31 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87190CB5151D36570013BE31 /* MainStoryboard.storyboard */; };
-		87190CBA151D36570013BE31 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87190CB9151D36570013BE31 /* ViewController.m */; };
+		87190CBA151D36570013BE31 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 87190CB9151D36570013BE31 /* ViewController.mm */; };
 		87190CBF151D36FA0013BE31 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87190CBE151D36FA0013BE31 /* GLKit.framework */; };
 		87190CC1151D37000013BE31 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87190CC0151D37000013BE31 /* OpenGLES.framework */; };
 		87190CCD151D3D350013BE31 /* SWFViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 87190CCC151D3D350013BE31 /* SWFViewController.mm */; };
@@ -46,10 +46,10 @@
 		87190CAF151D36570013BE31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		87190CB1151D36570013BE31 /* Preview-iPad-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Preview-iPad-Prefix.pch"; sourceTree = "<group>"; };
 		87190CB2151D36570013BE31 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		87190CB3151D36570013BE31 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		87190CB3151D36570013BE31 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		87190CB6151D36570013BE31 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		87190CB8151D36570013BE31 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		87190CB9151D36570013BE31 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		87190CB9151D36570013BE31 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		87190CBE151D36FA0013BE31 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		87190CC0151D37000013BE31 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		87190CCB151D3D350013BE31 /* SWFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWFViewController.h; sourceTree = "<group>"; };
@@ -64,6 +64,7 @@
 		87733885151D414A0012CE91 /* DocumentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentsTableViewController.h; sourceTree = "<group>"; };
 		87733886151D414A0012CE91 /* DocumentsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DocumentsTableViewController.mm; sourceTree = "<group>"; };
 		87BE82A215117D9E00128FD1 /* read_bits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = read_bits.cpp; sourceTree = "<group>"; };
+		87E14D30151E103300EDC4A1 /* renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = renderer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,10 +96,10 @@
 			isa = PBXGroup;
 			children = (
 				87190CB2151D36570013BE31 /* AppDelegate.h */,
-				87190CB3151D36570013BE31 /* AppDelegate.m */,
+				87190CB3151D36570013BE31 /* AppDelegate.mm */,
 				87190CB5151D36570013BE31 /* MainStoryboard.storyboard */,
 				87190CB8151D36570013BE31 /* ViewController.h */,
-				87190CB9151D36570013BE31 /* ViewController.m */,
+				87190CB9151D36570013BE31 /* ViewController.mm */,
 				87190CAA151D36570013BE31 /* Supporting Files */,
 				87190CCB151D3D350013BE31 /* SWFViewController.h */,
 				87190CCC151D3D350013BE31 /* SWFViewController.mm */,
@@ -158,6 +159,7 @@
 				87606D931511000A002A1782 /* types.h */,
 				87BE82A215117D9E00128FD1 /* read_bits.cpp */,
 				87190C7D151C341D0013BE31 /* shape.h */,
+				87E14D30151E103300EDC4A1 /* renderer.h */,
 			);
 			path = swf;
 			sourceTree = "<group>";
@@ -257,8 +259,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				87190CB0151D36570013BE31 /* main.m in Sources */,
-				87190CB4151D36570013BE31 /* AppDelegate.m in Sources */,
-				87190CBA151D36570013BE31 /* ViewController.m in Sources */,
+				87190CB4151D36570013BE31 /* AppDelegate.mm in Sources */,
+				87190CBA151D36570013BE31 /* ViewController.mm in Sources */,
 				87190CCD151D3D350013BE31 /* SWFViewController.mm in Sources */,
 				87733887151D414A0012CE91 /* DocumentsTableViewController.mm in Sources */,
 			);
