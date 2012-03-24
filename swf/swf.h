@@ -69,7 +69,7 @@ namespace swf
 			RECORDHEADER header;
 			f >> header;
 			
-			parse_tag_fun &p = tag_parser[header.tag];
+			parse_tag_fun &p = tag_parser[(tag_id)header.tag];
 			if (!p) {
 				cout << "TAG NOT IMPLEMENTED:" << int(header.tag) << endl;
 				streamsize off = skip_size(header);
@@ -79,12 +79,25 @@ namespace swf
 				streampos start_pos = f.tellg();
 				p(f, result);
 				// check that the parser consumed all the required data
-				assert((f.tellg()-start_pos == skip_size(header)));
+				streampos len = skip_size(header);
+				streampos read = f.tellg()-start_pos;
+				if (read != len) {
+					cout << "TAG BYTES UNREAD:" << (len-read) << " [" << header.tag << "]" << endl;
+					f.seekg(start_pos+len-read);
+				}
 			}
 		}
 	}
 	
 	// tags
+	
+	void end(istream &s, SWF &swf) {
+		cout << "end" << endl;
+	}
+	
+	void show_frame(istream &s, SWF &swf) {
+		cout << "show frame" << endl;
+	}
 	
 	void define_shape(istream &s, SWF &swf) {
 		cout << "DEFINE SHAPE" << endl;
@@ -115,7 +128,9 @@ namespace swf
 	}
 	
 	static void init_tag_parsers() {
-		register_parser(DefineShape, &define_shape);
+		register_parser(End, &end);
+		register_parser(ShowFrame, &show_frame);
+		//register_parser(DefineShape, &define_shape);
 		register_parser(DefineShape4, &define_shape_4);
 	}
 }

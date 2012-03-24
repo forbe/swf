@@ -28,6 +28,16 @@
 		87BE82A315117D9E00128FD1 /* read_bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87BE82A215117D9E00128FD1 /* read_bits.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		877338B8151D50F20012CE91 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 871B674E150CF55B002DFA87 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 871B677B150CF56E002DFA87;
+			remoteInfo = swf;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		87190C7D151C341D0013BE31 /* shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shape.h; sourceTree = "<group>"; };
 		87190CA4151D36570013BE31 /* Preview-iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Preview-iPad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +189,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				877338B9151D50F20012CE91 /* PBXTargetDependency */,
 			);
 			name = "Preview-iPad";
 			productName = "Preview-iPad";
@@ -263,6 +274,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		877338B9151D50F20012CE91 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 871B677B150CF56E002DFA87 /* swf */;
+			targetProxy = 877338B8151D50F20012CE91 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		87190CAC151D36570013BE31 /* InfoPlist.strings */ = {

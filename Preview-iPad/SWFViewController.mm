@@ -33,6 +33,7 @@
 	swf::SWF SWF;
 	ifstream input;
 	input.open([swfPath UTF8String]);
+	swf::init_tag_parsers();
 	swf::parse(input, SWF);
 }
 
