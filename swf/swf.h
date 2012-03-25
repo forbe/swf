@@ -10,6 +10,7 @@
 #include <fstream>
 #include <istream>
 #include "types.h"
+#include "shape.h"
 #include <map>
 
 using namespace std;
@@ -110,8 +111,27 @@ namespace swf
 		UI16 shape_id;
 		RECT shape_bounds;
 		RECT edge_bounds;
-		UI8 reserved, uses_fill_winding_rule, uses_non_scaling_strokes, uses_scaling_strokes;
+		UI8 uses_fill_winding_rule, uses_non_scaling_strokes, uses_scaling_strokes;
+		
+		s >> shape_id;
+		s >> shape_bounds;
+		s >> edge_bounds;
+		BitReader<UI8> reader(s);
+		reader.skip(5); // reserved
+		reader.read(uses_fill_winding_rule, 1);
+		reader.read(uses_non_scaling_strokes, 1);
+		
+		do {
+			SHAPEWITHSTYLE shape;
+			s >> shape;
+		} while(false);
+		
 		swf.dictionary[shape_id] = NULL;
+		
+	}
+	
+	void place_object_2(istream &s, SWF &swf) {
+		
 	}
 	
 	void file_attributes(istream &s, SWF &swf) {
@@ -132,5 +152,6 @@ namespace swf
 		register_parser(ShowFrame, &show_frame);
 		register_parser(DefineShape, &define_shape);
 		register_parser(DefineShape4, &define_shape_4);
+		register_parser(PlaceObject2, &place_object_2);
 	}
 }

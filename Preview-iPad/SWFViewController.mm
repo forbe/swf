@@ -33,7 +33,7 @@
 	glLoadIdentity();
 	glDisable(GL_DEPTH_TEST);
 	
-	glClearColor(.2, .2, .2, 1);
+	glClearColor(.5, .5, .5, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	if (m_swf) 
@@ -44,7 +44,8 @@
 		glTranslatef(frame.size.width/2, frame.size.height/2, 0);
 		glScalef(.05f, .05f, 1);
 		glTranslatef(-(f.x_max-f.x_min)/2, -(f.y_max-f.y_min)/2, 0);
-		float stage[] = {
+		float stage[] = 
+		{
 			(float)f.x_min, (float)f.y_min,
 			(float)f.x_min, (float)f.y_max,
 			(float)f.x_max, (float)f.y_max,
@@ -53,6 +54,8 @@
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(2, GL_FLOAT, 0, &stage[0]);
 		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+		glColor4f(0, 0, 0, 1);
+		glDrawArrays(GL_LINE_LOOP, 0, 4);
 		glPopMatrix();
 	}
 }

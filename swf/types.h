@@ -11,6 +11,11 @@
 
 #include "read_bits.cpp"
 
+#define READ(stream, target) \
+	stream.read((char *)target, sizeof(target))
+#define READ_TYPE(stream, target, type) \
+	stream.read((char *)target, sizeof(type))
+
 namespace swf 
 {
 	typedef char			SI8;

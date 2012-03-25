@@ -9,7 +9,8 @@
 #ifndef SWFParser_shape_h
 #define SWFParser_shape_h
 
-#include "swf.h"
+#include "types.h"
+#include <vector>
 
 using namespace std;
 
@@ -37,22 +38,41 @@ namespace swf
 		UI8 fill_style_type;
 	};
 	
-	struct FILLSTYLE_GRADIENT : FILLSTYLE
+	/*struct FILLSTYLE_GRADIENT : FILLSTYLE
 	{
 		
-	};
+	};*/
 	
-	struct FILLSTYLEARRAY
+	/*struct FILLSTYLEARRAY
 	{
-		UI8 fill_style_count;
-		UI16 fill_style_extended;
-		FILLSTYLE *fill_styles;
-	};
+		UI16 fill_style_count;
+		vector<FILLSTYLE> fill_styles;
+	};*/
+	
+	typedef vector<FILLSTYLE> FILLSTYLEARRAY;
+	
+	istream &operator>>(istream &input, FILLSTYLEARRAY &array) {
+		UI16 num_styles = 0;
+		READ_TYPE(input, num_styles, UI8);
+		if (num_styles == 0xFF)
+			READ_TYPE(input, num_styles, UI16);
+		array.reserve(num_styles);
+		for (int i=0; i<num_styles; ++i) {
+			FILLSTYLE style;
+			//input >> style;
+			array.push_back(style);
+		}
+		return input;
+	}
 	
 	struct LINESTYLEARRAY
 	{
 		
 	};
+	
+	istream &operator>>(istream &input, LINESTYLEARRAY array) {
+		return input;
+	}
 	
 	struct SHAPERECORD
 	{
@@ -61,8 +81,22 @@ namespace swf
 	
 	struct SHAPEWITHSTYLE 
 	{
-		
+		FILLSTYLEARRAY fill_styles;
+		LINESTYLEARRAY line_styles;
+		UI8 num_fill_bits;
+		UI8 num_line_bits;
 	};
+	
+	istream &operator>>(istream &input, SHAPEWITHSTYLE &shape) {
+		input >> shape.fill_styles;
+		input >> shape.line_styles;
+		BitReader<UI8> reader(input);
+		reader.read(shape.num_fill_bits, 4);
+		reader.read(shape.num_line_bits, 4);
+		return input;
+	}
+	
+	// shape records
 	
 	struct ENDSHAPERECORD
 	{
