@@ -6,11 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <GLKit/GLKit.h>z
+#import <GLKit/GLKit.h>
 
-namespace swf {
-	struct SWF;
-}
+namespace swf { class SWF; }
 
 @interface SWFViewController : GLKViewController {
 	NSString *_swfPath;

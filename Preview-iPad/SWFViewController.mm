@@ -56,6 +56,10 @@
 		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 		glColor4f(0, 0, 0, 1);
 		glDrawArrays(GL_LINE_LOOP, 0, 4);
+		
+		//
+		m_swf->process_frame();
+		
 		glPopMatrix();
 	}
 }
@@ -64,13 +68,15 @@
 	NSLog(@"set swf path:%@", swfPath);
 	_swfPath = swfPath;
 	
-	if (m_swf) delete m_swf;
-	m_swf = new swf::SWF();
 	
-	ifstream input;
-	input.open([swfPath UTF8String]);
+	//input.open([swfPath UTF8String]);
+	
+	ifstream * input = new ifstream([swfPath UTF8String]);
+	
 	swf::init_tag_parsers();
-	swf::parse(input, *m_swf);
+	if (m_swf) delete m_swf;
+	m_swf = new swf::SWF(input);
+	self.preferredFramesPerSecond = m_swf->frame_rate;
 }
 
 @end

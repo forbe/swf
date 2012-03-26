@@ -6,18 +6,24 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#ifndef SWFParser_swf_h
+#define SWFParser_swf_h
+
 #include <iostream>
 #include <fstream>
 #include <istream>
+#include <map>
+#include <OpenGLES/ES1/gl.h>
+
 #include "types.h"
 #include "shape.h"
-#include <map>
 
-using namespace std;
 
 namespace swf
 {
-	struct SWF;
+	class SWF;
+	
+	using namespace std;
 	
 	typedef void (*parse_tag_fun)(istream &, SWF &swf);
 	static void (*tag_parser[91])(istream &, SWF &swf) = { 0 };
@@ -31,77 +37,77 @@ namespace swf
 		tag_parser[tag] = f;
 	}
 	
-	struct SWF
+	class SWF
 	{
+	public:
 		UI8 version;
 		map<UI16, void *> dictionary;
+		float frame_rate;
 		RECT frame_size;
-	};
-
-	void parse(istream &f, SWF &result) 
-	{
-
-#define READ_S(t, s) \
-	f.read((char *)&t, s)
-
-#define READ(t) \
-	f.read((char *)&t, sizeof(t))
-		UI8 sig[4] = {0};
-		UI8 version;
-		UI32 file_length;
-		UI16 frame_rate, frame_count;
-		READ_S(sig, 3);
-		cout << "SIGNATURE:" << sig << endl;
-		f.read((char *)&version, 1);
-		cout << "VERSION:" << int(version) << endl;
-		READ(file_length);
-		cout << "FILE LENGTH:" << file_length << endl;
+		UI16 frame_count;
+		UI16 cur_frame;
+	private:
+		istream * m_input;
+	public:
 		
-		assert(sig[0] == 'F'); // compressed swf not supported yet
+		//SWF(istream &_input) : input(_input.rdbuf()) {
+		SWF(istream *input) : m_input(input), cur_frame(0) {
+			read_header();
+		}
 		
-		f >> result.frame_size;
-		READ(frame_rate);
-		READ(frame_count);
-		cout << "FRAME RATE:" << frame_rate << endl << "FRAME COUNT:" << frame_count << endl;
-		
-		while (f.good()) {
+		void process_frame() {
+			istream &input = *m_input;
+			streampos frame_start = input.tellg();
+			cur_frame++;
+			cout << "- start frame:" << cur_frame << " ------" << endl;
 			
 			RECORDHEADER header;
-			f >> header;
-			
-			parse_tag_fun &p = tag_parser[(tag_id)header.tag];
-			if (!p) {
-				cout << "TAG NOT IMPLEMENTED:" << int(header.tag) << endl;
-				streamsize off = skip_size(header);
-				f.seekg((streamsize)f.tellg()+off);
-				//f.ignore(off); // this shitty function doesn't work, I wonder why.
-			} else {
-				streampos start_pos = f.tellg();
-				p(f, result);
-				// check that the parser consumed all the required data
-				streampos len = skip_size(header);
-				streampos read = f.tellg()-start_pos;
-				if (read != len) {
-					cout << "TAG BYTES UNREAD:" << (len-read) << " [" << header.tag << "]" << endl;
-					f.seekg(start_pos+len-read);
+			do {
+				input >> header;
+				parse_tag_fun &p = tag_parser[(tag_id)header.tag];
+				if (!p) {
+					cout << "TAG [" << int(header.tag) << "] NOT IMPLEMENTED" << endl;
+					input.seekg((streamsize)input.tellg()+header.length);
+				} else {
+					streampos start_pos = input.tellg();
+					p(input, *this);
+					// check that the parser consumed all the required data
+					streamsize read = input.tellg()-start_pos;
+					if (read != header.length) {
+						cout << "TAG [" << header.tag << "] BYTES UNREAD:" << (header.length-read) << endl;
+						input.seekg(start_pos+(streampos)header.length);
+					}
 				}
+			} while (header.tag && header.tag != ShowFrame);
+			
+			if (cur_frame >= frame_count) { // stop at last frame
+				input.seekg(frame_start);
+				cur_frame--;
 			}
 		}
-	}
+		
+		void read_header() {
+			istream &input = *m_input;
+			UI8 sig[4] = {0};
+			UI32 file_length = 0;
+			UI16 frame_rate = 0;
+			READ_SIZE(input, sig, 3);
+			assert(sig[0] == 'F');
+			READ(input,	version);
+			READ(input, file_length);
+			input >> frame_size;
+			READ(input, frame_rate);
+			this->frame_rate = to_fixed(frame_rate);
+			READ(input, frame_count);
+		}
+	};
 	
 	// tags
-	
-	void end(istream &s, SWF &swf) {
-		cout << "end" << endl;
-	}
-	
-	void show_frame(istream &s, SWF &swf) {
-		cout << "show frame" << endl;
-	}
 	
 	void define_shape(istream &s, SWF &swf) {
 		cout << "DEFINE SHAPE" << endl;
 		UI16 shape_id;
+	
 		RECT shape_bounds;
 		read(s, shape_id);
 		s >> shape_bounds;
@@ -111,9 +117,9 @@ namespace swf
 		UI16 shape_id;
 		RECT shape_bounds;
 		RECT edge_bounds;
-		UI8 uses_fill_winding_rule, uses_non_scaling_strokes, uses_scaling_strokes;
+		UI8 uses_fill_winding_rule, uses_non_scaling_strokes;
 		
-		s >> shape_id;
+		READ(s, shape_id);
 		s >> shape_bounds;
 		s >> edge_bounds;
 		BitReader<UI8> reader(s);
@@ -126,12 +132,43 @@ namespace swf
 			s >> shape;
 		} while(false);
 		
-		swf.dictionary[shape_id] = NULL;
-		
+		//swf.dictionary[shape_id] = NULL;
 	}
 	
 	void place_object_2(istream &s, SWF &swf) {
+		bool flag_actions, flag_depth, flag_name, flag_ratio, flag_colortransform, flag_matrix, flag_character, flag_move;
+		BitReader<UI8> reader(s);
+		reader.read(flag_actions);
+		assert(!flag_actions); // clip actions are not supported, yet
+		reader.read(flag_depth);
+		reader.read(flag_name);
+		reader.read(flag_ratio);
+		reader.read(flag_colortransform);
+		reader.read(flag_matrix);
+		reader.read(flag_character);
+		reader.read(flag_move);
 		
+		UI16 depth;
+		READ(s, depth);
+		if (flag_character)
+			SKIP(s, sizeof(UI16));
+		MATRIX mat = {0};
+		if (flag_matrix) {
+			s >> mat;
+		}
+		if (flag_colortransform) {
+			// todo;
+		}
+		if (flag_ratio)
+			SKIP(s, sizeof(UI16));
+		
+		GLfloat p[] = {
+			(GLfloat)mat.translate_x, (GLfloat)mat.translate_y
+		};
+		glVertexPointer(2, GL_FLOAT, 0, &p);
+		glColor4f(1, 0, 0, 1);
+		glPointSize(10.0f);
+		glDrawArrays(GL_POINTS, 0, 1);
 	}
 	
 	void file_attributes(istream &s, SWF &swf) {
@@ -147,11 +184,14 @@ namespace swf
 		reader.read(reserved, 24);
 	}
 	
+	void show_frame(istream &s, SWF &swf) { }
+	
 	static void init_tag_parsers() {
-		register_parser(End, &end);
+		//register_parser(DefineShape, &define_shape);
 		register_parser(ShowFrame, &show_frame);
-		register_parser(DefineShape, &define_shape);
 		register_parser(DefineShape4, &define_shape_4);
 		register_parser(PlaceObject2, &place_object_2);
 	}
 }
+
+#endif

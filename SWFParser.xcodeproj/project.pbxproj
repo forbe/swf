@@ -22,10 +22,8 @@
 		871B677D150CF56E002DFA87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B675D150CF55B002DFA87 /* Foundation.framework */; };
 		87606D9815114B01002A1782 /* swf.h in Headers */ = {isa = PBXBuildFile; fileRef = 871B6781150CF56E002DFA87 /* swf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		87606D9915114B01002A1782 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 87606D931511000A002A1782 /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		87606D9B15114B60002A1782 /* swf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87606D9A15114B60002A1782 /* swf.cpp */; };
 		87733887151D414A0012CE91 /* DocumentsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 87733886151D414A0012CE91 /* DocumentsTableViewController.mm */; };
 		87733888151D46DC0012CE91 /* libswf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 871B677C150CF56E002DFA87 /* libswf.a */; };
-		87BE82A315117D9E00128FD1 /* read_bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87BE82A215117D9E00128FD1 /* read_bits.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,11 +58,9 @@
 		871B677C150CF56E002DFA87 /* libswf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libswf.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		871B6781150CF56E002DFA87 /* swf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = swf.h; sourceTree = "<group>"; };
 		87606D931511000A002A1782 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
-		87606D9A15114B60002A1782 /* swf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = swf.cpp; sourceTree = "<group>"; };
 		87733885151D414A0012CE91 /* DocumentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentsTableViewController.h; sourceTree = "<group>"; };
 		87733886151D414A0012CE91 /* DocumentsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DocumentsTableViewController.mm; sourceTree = "<group>"; };
-		87BE82A215117D9E00128FD1 /* read_bits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = read_bits.cpp; sourceTree = "<group>"; };
-		87E14D30151E103300EDC4A1 /* renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = renderer.h; sourceTree = "<group>"; };
+		87BE82A215117D9E00128FD1 /* read_bits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = read_bits.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,11 +151,9 @@
 			isa = PBXGroup;
 			children = (
 				871B6781150CF56E002DFA87 /* swf.h */,
-				87606D9A15114B60002A1782 /* swf.cpp */,
 				87606D931511000A002A1782 /* types.h */,
-				87BE82A215117D9E00128FD1 /* read_bits.cpp */,
+				87BE82A215117D9E00128FD1 /* read_bits.h */,
 				87190C7D151C341D0013BE31 /* shape.h */,
-				87E14D30151E103300EDC4A1 /* renderer.h */,
 			);
 			path = swf;
 			sourceTree = "<group>";
@@ -270,8 +264,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87606D9B15114B60002A1782 /* swf.cpp in Sources */,
-				87BE82A315117D9E00128FD1 /* read_bits.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

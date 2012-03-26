@@ -9,19 +9,13 @@
 #ifndef SWFParser_shape_h
 #define SWFParser_shape_h
 
-#include "types.h"
 #include <vector>
+#include "types.h"
 
 using namespace std;
 
 namespace swf 
-{
-	struct Shape
-	{
-		
-	};
-	
-	
+{	
 	enum fill_style_type_t {
 		solid = 0,
 		gradient_linear = 0x10,
@@ -36,18 +30,16 @@ namespace swf
 	struct FILLSTYLE
 	{
 		UI8 fill_style_type;
+		RGBA color;
 	};
 	
-	/*struct FILLSTYLE_GRADIENT : FILLSTYLE
+	istream &operator>>(istream &input, FILLSTYLE &style) 
 	{
-		
-	};*/
-	
-	/*struct FILLSTYLEARRAY
-	{
-		UI16 fill_style_count;
-		vector<FILLSTYLE> fill_styles;
-	};*/
+		READ(input, style.fill_style_type);
+		assert(style.fill_style_type == solid);
+		READ(input, style.color);
+		return input;
+	}
 	
 	typedef vector<FILLSTYLE> FILLSTYLEARRAY;
 	
@@ -59,9 +51,40 @@ namespace swf
 		array.reserve(num_styles);
 		for (int i=0; i<num_styles; ++i) {
 			FILLSTYLE style;
-			//input >> style;
+			input >> style;
 			array.push_back(style);
 		}
+		return input;
+	}
+	
+	struct LINESTYLE2
+	{
+		UI16 width;
+		RGBA color;
+	};
+	
+	istream &operator>>(istream &input, LINESTYLE2 &style) {
+		READ(input, style.width);
+		BitReader<UI8> reader(input);
+		reader.skip(2); // cap style
+		UI8 join_style;
+		reader.read(join_style, 2);
+		bool has_fill_flag;
+		reader.read(has_fill_flag, 1); // has fill flag
+		reader.skip(2); // no hscale and vscale
+		reader.skip(1); // pixel hinting
+		reader.skip(5); // reserved
+		reader.skip(1); // no close
+		reader.skip(2); // end cap style
+		
+		if (join_style == 2)
+			reader.skip(sizeof(UI16));
+		if (!has_fill_flag) {
+			input >> style.color;
+		} else {
+			assert(false); // fill stroke not supported
+		}
+		
 		return input;
 	}
 	
@@ -93,6 +116,12 @@ namespace swf
 		BitReader<UI8> reader(input);
 		reader.read(shape.num_fill_bits, 4);
 		reader.read(shape.num_line_bits, 4);
+		
+		do {
+			//BitReader<UI8> reader(input);
+			
+		} while (false);
+		
 		return input;
 	}
 	
@@ -117,11 +146,6 @@ namespace swf
 	{
 		
 	};
-	
-	istream &operator>>(istream &st, SHAPEWITHSTYLE &sh) 
-	{
-		
-	}
 }
 
 #endif
