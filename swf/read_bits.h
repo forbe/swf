@@ -54,6 +54,13 @@ namespace swf
 		}
 		
 		template <class U>
+		U read(size_t length = 1) {
+			U a = 0;
+			read(a, length);
+			return a;
+		}
+		
+		template <class U>
 		void read_signed(U &dest, size_t length) {
 			read(dest, length);
 			bool neg = dest & (1 << (length-1));
@@ -63,6 +70,22 @@ namespace swf
 				mask <<= length;
 				dest |= mask;
 			}
+		}
+		
+		template <class U>
+		U peek(size_t length) {
+			T _cur = cur;
+			size_t _off = off;
+			streampos start = input.tellg();
+			
+			U a = 0;
+			read(a, length);
+			
+			cur = _cur;
+			off = _off;
+			input.seekg(start);
+			
+			return a;
 		}
 		
 		void skip(size_t num_bits) {
@@ -77,6 +100,10 @@ namespace swf
 				off += to_skip;
 				left -= to_skip;
 			}
+		}
+		
+		void align() {
+			off = type_size;
 		}
 	};
 }

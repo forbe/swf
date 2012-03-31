@@ -88,12 +88,18 @@ namespace swf
 		return input;
 	}
 	
-	struct LINESTYLEARRAY
-	{
-		
-	};
+	typedef vector<LINESTYLE2> LINESTYLEARRAY;
 	
-	istream &operator>>(istream &input, LINESTYLEARRAY array) {
+	istream &operator>>(istream &input, LINESTYLEARRAY &array) {
+		UI16 count;
+		READ_TYPE(input, count, UI8);
+		if (count == 0xFF)
+			READ_TYPE(input, count, UI16);
+		for (int i=0; i<count; i++) {
+			LINESTYLE2 style;
+			input >> style;
+			array.push_back(style);
+		}
 		return input;
 	}
 	
@@ -102,12 +108,20 @@ namespace swf
 		
 	};
 	
+	enum RecordType {
+		ENDSHAPE,
+		STYLECHANGE,
+		STRAIGHTEDGE,
+		CURVEDEDGE
+	};
+	
 	struct SHAPEWITHSTYLE 
 	{
 		FILLSTYLEARRAY fill_styles;
 		LINESTYLEARRAY line_styles;
 		UI8 num_fill_bits;
 		UI8 num_line_bits;
+		vector<float> vertices;
 	};
 	
 	istream &operator>>(istream &input, SHAPEWITHSTYLE &shape) {
@@ -117,14 +131,103 @@ namespace swf
 		reader.read(shape.num_fill_bits, 4);
 		reader.read(shape.num_line_bits, 4);
 		
+		cout << "num fill styles:" << shape.fill_styles.size() << " num line styles:" << shape.line_styles.size() << endl;
+		
+		bool shape_end = false;
+		vector<float> vertices;
+		SI32 pos_x = 0, pos_y = 0;
 		do {
 			//BitReader<UI8> reader(input);
+			//reader.align();
+			UI16 front = reader.peek<UI16>(16); 
 			
-		} while (false);
+			bool type_flag;
+			reader.read(type_flag, 1);
+			
+			if (!type_flag) {
+				// non edge record
+				if (reader.peek<UI8>(5) == 0) {
+					// end of shape;
+					cout << "ENDSHAPE" << endl;
+					reader.skip(5);
+					shape_end = true;
+				} else {
+					cout << "CHANGESTYLE";
+					cout << " num vertices:" << vertices.size() << endl;
+					bool state_new_styles, state_line_style, state_fill_style_1, state_fill_style_0, state_moveto;
+					reader.read(state_new_styles);
+					reader.read(state_line_style);
+					reader.read(state_fill_style_1);
+					reader.read(state_fill_style_0);
+					reader.read(state_moveto);
+					
+					if (state_moveto) {
+						UI8 move_bits;
+						reader.read(move_bits, 5);
+						SI32 move_x, move_y;
+						reader.read_signed(move_x, move_bits);
+						reader.read_signed(move_y, move_bits);
+						pos_x += move_x;
+						pos_y += move_y;
+						vertices.push_back(pos_x);
+						vertices.push_back(pos_y);
+					}
+					
+					if (state_fill_style_0) {
+						reader.skip(shape.num_fill_bits);
+					}
+					
+					if (state_fill_style_1) {
+						reader.skip(shape.num_fill_bits);
+					}
+					
+					if (state_line_style) {
+						reader.skip(shape.num_line_bits);
+					}
+					
+					if (state_new_styles) {
+						FILLSTYLEARRAY a;
+						input >> a;
+						LINESTYLEARRAY b;
+						input >> b;
+						UI8 c;
+						READ(input, c);
+					}
+				}
+			} else {
+				//reader.skip(1);
+				bool straight_flag = reader.read<UI8>(1);
+				UI8 num_bits = reader.read<UI8>(4);
+				
+				if (straight_flag) {
+					cout << "STRAIGHT EDGE" << endl;
+					SI32 delta_x = 0, delta_y = 0;
+					bool general_line_flag;
+					reader.read(general_line_flag, 1);
+					if (general_line_flag) {
+						reader.read_signed(delta_x, num_bits+2);
+						reader.read_signed(delta_y, num_bits+2);
+					} else {
+						bool vertical = reader.read<UI8>(1);
+						reader.read_signed(vertical ? delta_y : delta_x, num_bits+2);
+					}
+					pos_x += delta_x;
+					pos_y += delta_y;
+					vertices.push_back(pos_x);
+					vertices.push_back(pos_y);
+				} else {
+					cout << "CURVED EDGE" << endl;
+				}
+				
+			}
+		} while (!shape_end);
+	
+		cout << "end num vertices:" << vertices.size()/2 << endl;
+		shape.vertices = vertices;
 		
 		return input;
 	}
-	
+	/*
 	// shape records
 	
 	struct ENDSHAPERECORD
@@ -146,6 +249,7 @@ namespace swf
 	{
 		
 	};
+	*/
 }
 
 #endif

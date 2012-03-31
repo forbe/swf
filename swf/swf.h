@@ -41,7 +41,7 @@ namespace swf
 	{
 	public:
 		UI8 version;
-		map<UI16, void *> dictionary;
+		map<UI16, vector<float>> dictionary;
 		float frame_rate;
 		RECT frame_size;
 		UI16 frame_count;
@@ -72,7 +72,8 @@ namespace swf
 					streampos start_pos = input.tellg();
 					p(input, *this);
 					// check that the parser consumed all the required data
-					streamsize read = input.tellg()-start_pos;
+					int cur_pos = input.tellg();
+					streamsize read = cur_pos-start_pos;
 					if (read != header.length) {
 						cout << "TAG [" << header.tag << "] BYTES UNREAD:" << (header.length-read) << endl;
 						input.seekg(start_pos+(streampos)header.length);
@@ -117,7 +118,7 @@ namespace swf
 		UI16 shape_id;
 		RECT shape_bounds;
 		RECT edge_bounds;
-		UI8 uses_fill_winding_rule, uses_non_scaling_strokes;
+		bool uses_fill_winding_rule, uses_non_scaling_strokes, uses_scaling_strokes;
 		
 		READ(s, shape_id);
 		s >> shape_bounds;
@@ -126,13 +127,14 @@ namespace swf
 		reader.skip(5); // reserved
 		reader.read(uses_fill_winding_rule, 1);
 		reader.read(uses_non_scaling_strokes, 1);
+		reader.read(uses_scaling_strokes, 1);
 		
-		do {
+		//do {
 			SHAPEWITHSTYLE shape;
 			s >> shape;
-		} while(false);
+		//} while(false);
 		
-		//swf.dictionary[shape_id] = NULL;
+		swf.dictionary[shape_id] = shape.vertices;
 	}
 	
 	void place_object_2(istream &s, SWF &swf) {
@@ -150,8 +152,9 @@ namespace swf
 		
 		UI16 depth;
 		READ(s, depth);
+		UI16 character_id = 0;
 		if (flag_character)
-			SKIP(s, sizeof(UI16));
+			READ(s, character_id);
 		MATRIX mat = {0};
 		if (flag_matrix) {
 			s >> mat;
@@ -162,13 +165,24 @@ namespace swf
 		if (flag_ratio)
 			SKIP(s, sizeof(UI16));
 		
-		GLfloat p[] = {
+		/*GLfloat p[] = {
 			(GLfloat)mat.translate_x, (GLfloat)mat.translate_y
-		};
-		glVertexPointer(2, GL_FLOAT, 0, &p);
+		};*/
+		
+		glPushMatrix();
+		glTranslatef((GLfloat)mat.translate_x, (GLfloat)mat.translate_y, 0);
+		vector<float> verts = swf.dictionary[1];
+		cout << "num verts: " << verts.size()/2 << endl;
+		for ( auto it = verts.begin(); it != verts.end(); ) {
+			cout << "(" << *(++it) << ", " << *(++it) << "), ";
+		}
+		cout << endl;
+		glVertexPointer(2, GL_FLOAT, 0, &verts[0]);
 		glColor4f(1, 0, 0, 1);
 		glPointSize(10.0f);
-		glDrawArrays(GL_POINTS, 0, 1);
+		//glLineWidth(4.0f);
+		glDrawArrays(GL_LINE_STRIP, 0, verts.size()/2);
+		glPopMatrix();
 	}
 	
 	void file_attributes(istream &s, SWF &swf) {
