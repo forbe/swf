@@ -38,9 +38,12 @@ stream.seekg((int)stream.tellg()+size)
 	{
 		int size = sizeof(T)*8;
 		int dec = value >> (size/2);
-		int mask = 1 << (size/2);
-		int frac = value & (mask-1);
-		float f = (float)dec + pow((float)frac, -(size/2.0f));
+		int mask = (1 << (size/2)) - 1;
+		int frac = value & mask;
+		float f = (float)dec;
+		if (frac)
+			f += pow((float)frac, -(size/2.0f));
+		
 		return f;
 	}
 	
