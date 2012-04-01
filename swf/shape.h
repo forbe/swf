@@ -185,7 +185,7 @@ namespace swf
 						reader.skip(shape.num_line_bits);
 					}
 					
-					if (state_new_styles) {
+					if (false && state_new_styles) { // not used by define shape 4
 						FILLSTYLEARRAY a;
 						input >> a;
 						LINESTYLEARRAY b;
