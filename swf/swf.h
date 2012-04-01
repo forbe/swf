@@ -25,8 +25,8 @@ namespace swf
 	
 	using namespace std;
 	
-	typedef void (*parse_tag_fun)(istream &, SWF &swf);
-	static void (*tag_parser[91])(istream &, SWF &swf) = { 0 };
+	typedef void (*parse_tag_fun)(istream &, RECORDHEADER &header, SWF &swf);
+	static void (*tag_parser[91])(istream &, RECORDHEADER &header, SWF &swf) = { 0 };
 	
 	template <class T>
 	static void read(istream &stream, T &target) {
@@ -42,10 +42,12 @@ namespace swf
 	public:
 		UI8 version;
 		map<UI16, vector<float>> dictionary;
+		vector<UI16> display_list;
 		float frame_rate;
 		RECT frame_size;
 		UI16 frame_count;
 		UI16 cur_frame;
+		streampos first_frame;
 	private:
 		istream * m_input;
 	public:
@@ -59,18 +61,18 @@ namespace swf
 			istream &input = *m_input;
 			streampos frame_start = input.tellg();
 			cur_frame++;
-			cout << "- start frame:" << cur_frame << " ------" << endl;
+			//cout << "- start frame:" << cur_frame << " ------" << endl;
 			
 			RECORDHEADER header;
 			do {
 				input >> header;
 				parse_tag_fun &p = tag_parser[(tag_id)header.tag];
 				if (!p) {
-					cout << "TAG [" << int(header.tag) << "] NOT IMPLEMENTED" << endl;
+					//cout << "TAG [" << int(header.tag) << "] NOT IMPLEMENTED" << endl;
 					input.seekg((streamsize)input.tellg()+header.length);
 				} else {
 					streampos start_pos = input.tellg();
-					p(input, *this);
+					p(input, header, *this);
 					// check that the parser consumed all the required data
 					int cur_pos = input.tellg();
 					streamsize read = cur_pos-start_pos;
@@ -82,8 +84,10 @@ namespace swf
 			} while (header.tag && header.tag != ShowFrame);
 			
 			if (cur_frame >= frame_count) { // stop at last frame
-				input.seekg(frame_start);
-				cur_frame--;
+				input.seekg(first_frame);
+				cur_frame = 0;
+				//input.seekg(frame_start);
+				//cur_frame--;
 			}
 		}
 		
@@ -93,19 +97,20 @@ namespace swf
 			UI32 file_length = 0;
 			UI16 frame_rate = 0;
 			READ_SIZE(input, sig, 3);
-			assert(sig[0] == 'F');
+			assert(sig[0] == 'F'); // compression not supported
 			READ(input,	version);
 			READ(input, file_length);
 			input >> frame_size;
 			READ(input, frame_rate);
 			this->frame_rate = to_fixed(frame_rate);
 			READ(input, frame_count);
+			this->first_frame = input.tellg();
 		}
 	};
 	
 	// tags
 	
-	void define_shape(istream &s, SWF &swf) {
+	void define_shape(istream &s, RECORDHEADER &header, SWF &swf) {
 		cout << "DEFINE SHAPE" << endl;
 		UI16 shape_id;
 	
@@ -114,7 +119,8 @@ namespace swf
 		s >> shape_bounds;
 	}
 	
-	void define_shape_4(istream &s, SWF &swf) {
+	void define_shape_4(istream &s, RECORDHEADER &header, SWF &swf) {
+		int start = s.tellg();
 		UI16 shape_id;
 		RECT shape_bounds;
 		RECT edge_bounds;
@@ -129,15 +135,14 @@ namespace swf
 		reader.read(uses_non_scaling_strokes, 1);
 		reader.read(uses_scaling_strokes, 1);
 		
-		//do {
+		do {
 			SHAPEWITHSTYLE shape;
 			s >> shape;
-		//} while(false);
-		
-		swf.dictionary[shape_id] = shape.vertices;
+			swf.dictionary[shape_id] = shape.vertices;
+		} while(false);//s.tellg() < start+header.length);
 	}
 	
-	void place_object_2(istream &s, SWF &swf) {
+	void place_object_2(istream &s, RECORDHEADER &header, SWF &swf) {
 		bool flag_actions, flag_depth, flag_name, flag_ratio, flag_colortransform, flag_matrix, flag_character, flag_move;
 		BitReader<UI8> reader(s);
 		reader.read(flag_actions);
@@ -153,14 +158,18 @@ namespace swf
 		UI16 depth;
 		READ(s, depth);
 		UI16 character_id = 0;
-		if (flag_character)
+		if (flag_character) {
 			READ(s, character_id);
+			swf.display_list.push_back(character_id);
+		} else {
+			character_id = swf.display_list[depth-1];
+		}
 		MATRIX mat = {0};
 		if (flag_matrix) {
 			s >> mat;
 		}
 		if (flag_colortransform) {
-			// todo;
+			assert(false);// todo;
 		}
 		if (flag_ratio)
 			SKIP(s, sizeof(UI16));
@@ -171,12 +180,18 @@ namespace swf
 		
 		glPushMatrix();
 		glTranslatef((GLfloat)mat.translate_x, (GLfloat)mat.translate_y, 0);
-		vector<float> verts = swf.dictionary[1];
+		if (flag_matrix) {
+			float rot = to_fixed(mat.rotate_skew_1);///to_fixed(mat.rotate_skew_1);
+			if(!isnan(rot))
+				glRotatef(rot, 0, 0, 1);
+		}
+		
+		vector<float> verts = swf.dictionary[character_id];
 		cout << "num verts: " << verts.size()/2 << endl;
-		for ( auto it = verts.begin(); it != verts.end(); ) {
+		/*for ( auto it = verts.begin(); it != verts.end(); ) {
 			cout << "(" << *(++it) << ", " << *(++it) << "), ";
 		}
-		cout << endl;
+		cout << endl;*/
 		glVertexPointer(2, GL_FLOAT, 0, &verts[0]);
 		glColor4f(1, 0, 0, 1);
 		glPointSize(10.0f);
@@ -185,7 +200,7 @@ namespace swf
 		glPopMatrix();
 	}
 	
-	void file_attributes(istream &s, SWF &swf) {
+	void file_attributes(istream &s, RECORDHEADER &header, SWF &swf) {
 		BitReader<UI8> reader(s);
 		UI8 reserved, use_direct_blit, use_gpu, has_metadata, as3, use_network;
 		reader.read(reserved, 1);
@@ -198,7 +213,7 @@ namespace swf
 		reader.read(reserved, 24);
 	}
 	
-	void show_frame(istream &s, SWF &swf) { }
+	void show_frame(istream &s, RECORDHEADER &header, SWF &swf) { }
 	
 	static void init_tag_parsers() {
 		//register_parser(DefineShape, &define_shape);
