@@ -37,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		870FBC9615290FC200D39D62 /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		87190C7D151C341D0013BE31 /* shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shape.h; sourceTree = "<group>"; };
 		87190CA4151D36570013BE31 /* Preview-iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Preview-iPad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87190CAB151D36570013BE31 /* Preview-iPad-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Preview-iPad-Info.plist"; sourceTree = "<group>"; };
@@ -154,6 +155,7 @@
 				87606D931511000A002A1782 /* types.h */,
 				87BE82A215117D9E00128FD1 /* read_bits.h */,
 				87190C7D151C341D0013BE31 /* shape.h */,
+				870FBC9615290FC200D39D62 /* utils.h */,
 			);
 			path = swf;
 			sourceTree = "<group>";

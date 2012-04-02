@@ -17,6 +17,7 @@
 
 #include "types.h"
 #include "shape.h"
+#include "utils.h"
 
 
 namespace swf
@@ -55,13 +56,13 @@ namespace swf
 		//SWF(istream &_input) : input(_input.rdbuf()) {
 		SWF(istream *input) : m_input(input), cur_frame(0) {
 			read_header();
+			cout << to_bin(8) << endl;
 		}
 		
 		void process_frame() {
 			istream &input = *m_input;
 			streampos frame_start = input.tellg();
 			cur_frame++;
-			//cout << "- start frame:" << cur_frame << " ------" << endl;
 			
 			RECORDHEADER header;
 			do {
@@ -109,15 +110,6 @@ namespace swf
 	};
 	
 	// tags
-	
-	void define_shape(istream &s, RECORDHEADER &header, SWF &swf) {
-		cout << "DEFINE SHAPE" << endl;
-		UI16 shape_id;
-	
-		RECT shape_bounds;
-		read(s, shape_id);
-		s >> shape_bounds;
-	}
 	
 	void define_shape_4(istream &s, RECORDHEADER &header, SWF &swf) {
 		int start = s.tellg();
@@ -216,7 +208,6 @@ namespace swf
 	void show_frame(istream &s, RECORDHEADER &header, SWF &swf) { }
 	
 	static void init_tag_parsers() {
-		//register_parser(DefineShape, &define_shape);
 		register_parser(ShowFrame, &show_frame);
 		register_parser(DefineShape4, &define_shape_4);
 		register_parser(PlaceObject2, &place_object_2);

@@ -89,7 +89,9 @@ namespace swf
 		}
 		
 		void skip(size_t num_bits) {
-			size_t left = num_bits;
+			unsigned int tmp;
+			read(tmp, num_bits);
+			/*size_t left = num_bits;
 			while (left) {
 				if (off >= type_size) {
 					off = 0;
@@ -99,11 +101,16 @@ namespace swf
 				size_t to_skip = left_in_cur < left ? left_in_cur : left;
 				off += to_skip;
 				left -= to_skip;
-			}
+			}*/
 		}
 		
 		void align() {
-			off = type_size;
+			if (off)
+				off = type_size;
+		}
+		
+		uint offset() {
+			return off;
 		}
 	};
 }

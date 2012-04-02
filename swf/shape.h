@@ -11,6 +11,7 @@
 
 #include <vector>
 #include "types.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -78,7 +79,7 @@ namespace swf
 		reader.skip(2); // end cap style
 		
 		if (join_style == 2)
-			reader.skip(sizeof(UI16));
+			reader.skip(sizeof(UI16)*8);
 		if (!has_fill_flag) {
 			input >> style.color;
 		} else {
@@ -125,13 +126,12 @@ namespace swf
 	};
 	
 	istream &operator>>(istream &input, SHAPEWITHSTYLE &shape) {
+		cout << "---- parse shape with style ----" << endl;
 		input >> shape.fill_styles;
 		input >> shape.line_styles;
 		BitReader<UI8> reader(input);
 		reader.read(shape.num_fill_bits, 4);
 		reader.read(shape.num_line_bits, 4);
-		
-		cout << "num fill styles:" << shape.fill_styles.size() << " num line styles:" << shape.line_styles.size() << endl;
 		
 		bool shape_end = false;
 		vector<float> vertices;
@@ -140,6 +140,7 @@ namespace swf
 			//BitReader<UI8> reader(input);
 			//reader.align();
 			UI16 front = reader.peek<UI16>(16); 
+			cout << to_bin(front, reader.offset()) << " : ";
 			
 			bool type_flag;
 			reader.read(type_flag, 1);
@@ -152,8 +153,7 @@ namespace swf
 					reader.skip(5);
 					shape_end = true;
 				} else {
-					cout << "CHANGESTYLE";
-					cout << " num vertices:" << vertices.size() << endl;
+					cout << "CHANGESTYLE" << endl;
 					bool state_new_styles, state_line_style, state_fill_style_1, state_fill_style_0, state_moveto;
 					reader.read(state_new_styles);
 					reader.read(state_line_style);
@@ -222,34 +222,10 @@ namespace swf
 			}
 		} while (!shape_end);
 	
-		cout << "end num vertices:" << vertices.size()/2 << endl;
 		shape.vertices = vertices;
 		
 		return input;
 	}
-	/*
-	// shape records
-	
-	struct ENDSHAPERECORD
-	{
-		
-	};
-	
-	struct STYLECHANGERECORD
-	{
-		
-	};
-	
-	struct STRAIGHTEDGERECORD
-	{
-		
-	};
-	
-	struct CURVEDEDGERECORD
-	{
-		
-	};
-	*/
 }
 
 #endif
