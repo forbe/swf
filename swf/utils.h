@@ -12,6 +12,8 @@
 #include <string>
 #include <istream>
 
+#define RAD_TO_DEG(x) x * 180 / 3.141592654
+
 template <class T>
 string to_bin(T value, streampos p = 0)
 {

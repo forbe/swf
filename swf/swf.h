@@ -207,11 +207,8 @@ namespace swf
 		for (ShapeRef &ref : swf.display_list) 
 		{
 			glPushMatrix();
-			glTranslatef((GLfloat)ref.matrix.translate_x, (GLfloat)ref.matrix.translate_y, 0);
-			/*float rot = to_fixed(mat.rotate_skew_1);///to_fixed(mat.rotate_skew_1);
-			if(!isnan(rot))
-				glRotatef(rot, 0, 0, 1);
-			*/
+			glTranslatef(ref.matrix.translate_x, ref.matrix.translate_y, 0);
+			glRotatef(RAD_TO_DEG(sin(ref.matrix.rotate_skew_0)), 0, 0, 1);
 			vector<float> verts = swf.dictionary[ref.character_id];
 			glVertexPointer(2, GL_FLOAT, 0, &verts[0]);
 			glColor4f(1, 0, 0, 1);

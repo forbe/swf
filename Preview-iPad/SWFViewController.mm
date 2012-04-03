@@ -27,7 +27,7 @@
 	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrthof(0, frame.size.width, 0, frame.size.height, -1, 1);
+	glOrthof(0, frame.size.width, frame.size.height, 0 , -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glDisable(GL_DEPTH_TEST);
@@ -56,7 +56,6 @@
 		glColor4f(0, 0, 0, 1);
 		glDrawArrays(GL_LINE_LOOP, 0, 4);
 		
-		//
 		m_swf->process_frame();
 		
 		glPopMatrix();
@@ -71,6 +70,7 @@
 	if (m_swf) delete m_swf;
 	m_swf = new swf::SWF(input);
 	self.preferredFramesPerSecond = m_swf->frame_rate;
+	NSLog(@"playing at %i fps.", self.framesPerSecond); // this is not the same as asked, is a fraction of the display's refresh rate...
 }
 
 @end

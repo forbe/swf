@@ -73,6 +73,13 @@ namespace swf
 		}
 		
 		template <class U>
+		U read_signed(size_t length) {
+			U a = 0;
+			read_signed(a, length);
+			return a;
+		}
+		
+		template <class U>
 		U peek(size_t length) {
 			T _cur = cur;
 			size_t _off = off;
