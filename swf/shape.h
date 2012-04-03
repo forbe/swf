@@ -126,7 +126,7 @@ namespace swf
 	};
 	
 	istream &operator>>(istream &input, SHAPEWITHSTYLE &shape) {
-		cout << "---- parse shape with style ----" << endl;
+		// cout << "---- parse shape with style ----" << endl;
 		input >> shape.fill_styles;
 		input >> shape.line_styles;
 		BitReader<UI8> reader(input);
@@ -137,10 +137,8 @@ namespace swf
 		vector<float> vertices;
 		SI32 pos_x = 0, pos_y = 0;
 		do {
-			//BitReader<UI8> reader(input);
-			//reader.align();
 			UI16 front = reader.peek<UI16>(16); 
-			cout << to_bin(front, reader.offset()) << " : ";
+			//cout << to_bin(front, reader.offset()) << " : ";
 			
 			bool type_flag;
 			reader.read(type_flag, 1);
@@ -149,11 +147,11 @@ namespace swf
 				// non edge record
 				if (reader.peek<UI8>(5) == 0) {
 					// end of shape;
-					cout << "ENDSHAPE" << endl;
+					//cout << "ENDSHAPE" << endl;
 					reader.skip(5);
 					shape_end = true;
 				} else {
-					cout << "CHANGESTYLE" << endl;
+					//cout << "CHANGESTYLE" << endl;
 					bool state_new_styles, state_line_style, state_fill_style_1, state_fill_style_0, state_moveto;
 					reader.read(state_new_styles);
 					reader.read(state_line_style);
@@ -195,12 +193,11 @@ namespace swf
 					}
 				}
 			} else {
-				//reader.skip(1);
 				bool straight_flag = reader.read<UI8>(1);
 				UI8 num_bits = reader.read<UI8>(4);
 				
 				if (straight_flag) {
-					cout << "STRAIGHT EDGE" << endl;
+					//cout << "STRAIGHT EDGE" << endl;
 					SI32 delta_x = 0, delta_y = 0;
 					bool general_line_flag;
 					reader.read(general_line_flag, 1);
@@ -216,7 +213,8 @@ namespace swf
 					vertices.push_back(pos_x);
 					vertices.push_back(pos_y);
 				} else {
-					cout << "CURVED EDGE" << endl;
+					//cout << "CURVED EDGE" << endl;
+					assert(false);
 				}
 				
 			}

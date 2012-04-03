@@ -91,17 +91,6 @@ namespace swf
 		void skip(size_t num_bits) {
 			unsigned int tmp;
 			read(tmp, num_bits);
-			/*size_t left = num_bits;
-			while (left) {
-				if (off >= type_size) {
-					off = 0;
-					input.read((char *)&cur, sizeof(T));
-				}
-				size_t left_in_cur = type_size - off;
-				size_t to_skip = left_in_cur < left ? left_in_cur : left;
-				off += to_skip;
-				left -= to_skip;
-			}*/
 		}
 		
 		void align() {

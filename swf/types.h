@@ -14,6 +14,7 @@
 
 namespace swf 
 {
+	
 #define READ(stream, target) \
 stream.read((char *)&target, sizeof(target))
 	
@@ -25,6 +26,9 @@ stream.read((char *)&target, size)
 	
 #define SKIP(stream, size) \
 stream.seekg((int)stream.tellg()+size)
+
+#define UNHANDLED(input, length) \
+SKIP(input, length)
 	
 	typedef char			SI8;
 	typedef short			SI16;
@@ -88,6 +92,12 @@ stream.seekg((int)stream.tellg()+size)
 		SI32 scale_x, scale_y;
 		UI32 rotate_skew_0, rotate_skew_1;
 		SI32 translate_x, translate_y;
+	};
+	
+	void indentity(MATRIX &mat) {
+		mat.scale_x = mat.scale_y = 1;
+		mat.rotate_skew_0 = mat.rotate_skew_1 = 0;
+		mat.translate_x = mat.translate_y = 0;
 	};
 	
 	std::istream &operator>>(std::istream &input, MATRIX &matrix)

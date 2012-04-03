@@ -18,7 +18,6 @@
 	EAGLContext *ctx = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
 	GLKView *glv = (GLKView *)self.view;
 	glv.context = ctx;
-	NSLog(@"view did load");
 	m_swf = NULL;
 }
 
@@ -65,12 +64,7 @@
 }
 
 -(void)setSwfPath:(NSString *)swfPath {
-	NSLog(@"set swf path:%@", swfPath);
 	_swfPath = swfPath;
-	
-	
-	//input.open([swfPath UTF8String]);
-	
 	ifstream * input = new ifstream([swfPath UTF8String]);
 	
 	swf::init_tag_parsers();

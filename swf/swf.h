@@ -14,6 +14,7 @@
 #include <istream>
 #include <map>
 #include <OpenGLES/ES1/gl.h>
+#include <string>
 
 #include "types.h"
 #include "shape.h"
@@ -38,12 +39,19 @@ namespace swf
 		tag_parser[tag] = f;
 	}
 	
+	struct ShapeRef
+	{
+		UI16 character_id;
+		MATRIX matrix;
+		string name;
+	};
+	
 	class SWF
 	{
 	public:
 		UI8 version;
 		map<UI16, vector<float>> dictionary;
-		vector<UI16> display_list;
+		vector<ShapeRef> display_list;
 		float frame_rate;
 		RECT frame_size;
 		UI16 frame_count;
@@ -56,7 +64,6 @@ namespace swf
 		//SWF(istream &_input) : input(_input.rdbuf()) {
 		SWF(istream *input) : m_input(input), cur_frame(0) {
 			read_header();
-			cout << to_bin(8) << endl;
 		}
 		
 		void process_frame() {
@@ -69,7 +76,6 @@ namespace swf
 				input >> header;
 				parse_tag_fun &p = tag_parser[(tag_id)header.tag];
 				if (!p) {
-					//cout << "TAG [" << int(header.tag) << "] NOT IMPLEMENTED" << endl;
 					input.seekg((streamsize)input.tellg()+header.length);
 				} else {
 					streampos start_pos = input.tellg();
@@ -84,12 +90,15 @@ namespace swf
 				}
 			} while (header.tag && header.tag != ShowFrame);
 			
-			if (cur_frame >= frame_count) { // stop at last frame
-				input.seekg(first_frame);
-				cur_frame = 0;
-				//input.seekg(frame_start);
-				//cur_frame--;
+			if (cur_frame >= frame_count) {
+				restart();
 			}
+		}
+		
+		void restart() {
+			m_input->seekg(first_frame);
+			cur_frame = 0;
+			display_list.clear();
 		}
 		
 		void read_header() {
@@ -149,12 +158,10 @@ namespace swf
 		
 		UI16 depth;
 		READ(s, depth);
+		depth -= 1;
 		UI16 character_id = 0;
 		if (flag_character) {
 			READ(s, character_id);
-			swf.display_list.push_back(character_id);
-		} else {
-			character_id = swf.display_list[depth-1];
 		}
 		MATRIX mat = {0};
 		if (flag_matrix) {
@@ -166,30 +173,20 @@ namespace swf
 		if (flag_ratio)
 			SKIP(s, sizeof(UI16));
 		
-		/*GLfloat p[] = {
-			(GLfloat)mat.translate_x, (GLfloat)mat.translate_y
-		};*/
-		
-		glPushMatrix();
-		glTranslatef((GLfloat)mat.translate_x, (GLfloat)mat.translate_y, 0);
-		if (flag_matrix) {
-			float rot = to_fixed(mat.rotate_skew_1);///to_fixed(mat.rotate_skew_1);
-			if(!isnan(rot))
-				glRotatef(rot, 0, 0, 1);
+		if (!flag_move && flag_character) {			// new character
+			ShapeRef ref;
+			ref.matrix = mat;
+			ref.character_id = character_id;
+			swf.display_list.insert(swf.display_list.begin()+depth, ref);
+		} else if (flag_move) {
+			ShapeRef &ref = swf.display_list[depth];
+			if (flag_matrix)
+				ref.matrix = mat;
+			
+			if (flag_character) {					// modify character
+				ref.character_id = character_id;
+			}
 		}
-		
-		vector<float> verts = swf.dictionary[character_id];
-		cout << "num verts: " << verts.size()/2 << endl;
-		/*for ( auto it = verts.begin(); it != verts.end(); ) {
-			cout << "(" << *(++it) << ", " << *(++it) << "), ";
-		}
-		cout << endl;*/
-		glVertexPointer(2, GL_FLOAT, 0, &verts[0]);
-		glColor4f(1, 0, 0, 1);
-		glPointSize(10.0f);
-		//glLineWidth(4.0f);
-		glDrawArrays(GL_LINE_STRIP, 0, verts.size()/2);
-		glPopMatrix();
 	}
 	
 	void file_attributes(istream &s, RECORDHEADER &header, SWF &swf) {
@@ -205,10 +202,31 @@ namespace swf
 		reader.read(reserved, 24);
 	}
 	
-	void show_frame(istream &s, RECORDHEADER &header, SWF &swf) { }
+	void show_frame(istream &s, RECORDHEADER &header, SWF &swf) 
+	{
+		for (ShapeRef &ref : swf.display_list) 
+		{
+			glPushMatrix();
+			glTranslatef((GLfloat)ref.matrix.translate_x, (GLfloat)ref.matrix.translate_y, 0);
+			/*float rot = to_fixed(mat.rotate_skew_1);///to_fixed(mat.rotate_skew_1);
+			if(!isnan(rot))
+				glRotatef(rot, 0, 0, 1);
+			*/
+			vector<float> verts = swf.dictionary[ref.character_id];
+			glVertexPointer(2, GL_FLOAT, 0, &verts[0]);
+			glColor4f(1, 0, 0, 1);
+			glPointSize(10.0f);
+			glDrawArrays(GL_LINE_STRIP, 0, verts.size()/2);
+			glPopMatrix();
+		}
+	}
+	
+	void end(istream &s, RECORDHEADER &header, SWF &swf)
+	{ }
 	
 	static void init_tag_parsers() {
 		register_parser(ShowFrame, &show_frame);
+		register_parser(End, &end);
 		register_parser(DefineShape4, &define_shape_4);
 		register_parser(PlaceObject2, &place_object_2);
 	}
