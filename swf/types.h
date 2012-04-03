@@ -45,9 +45,10 @@ SKIP(input, length)
 		int mask = (1 << (size/2)) - 1;
 		int frac = value & mask;
 		float f = (float)dec;
-		if (frac)
-			f += pow((float)frac, -(size/2.0f));
-		
+		if (frac) {
+			float div = pow(2, -(size/2.0f));
+			f += (float)frac * div;
+		}
 		return f;
 	}
 	
@@ -89,8 +90,8 @@ SKIP(input, length)
 	
 	struct MATRIX
 	{
-		SI32 scale_x, scale_y;
-		UI32 rotate_skew_0, rotate_skew_1;
+		float scale_x, scale_y;
+		float rotate_skew_0, rotate_skew_1;
 		SI32 translate_x, translate_y;
 	};
 	
@@ -99,6 +100,12 @@ SKIP(input, length)
 		mat.rotate_skew_0 = mat.rotate_skew_1 = 0;
 		mat.translate_x = mat.translate_y = 0;
 	};
+	
+	std::ostream &operator<<(std::ostream &output, MATRIX &mat)
+	{
+		output << "MATRIX(a="<<mat.rotate_skew_0<<", b="<<mat.rotate_skew_1<<")";
+		return output;
+	}
 	
 	std::istream &operator>>(std::istream &input, MATRIX &matrix)
 	{
@@ -109,16 +116,30 @@ SKIP(input, length)
 		if (has_scale) {
 			UI8 num_scale_bits;
 			reader.read(num_scale_bits, 5);
-			reader.read_signed(matrix.scale_x, num_scale_bits);
-			reader.read_signed(matrix.scale_y, num_scale_bits);
+			SI32 sx, sy;
+			reader.read_signed(sx, num_scale_bits);
+			reader.read_signed(sy, num_scale_bits);
+			matrix.scale_x = to_fixed(sx);
+			matrix.scale_y = to_fixed(sy);
+			//reader.read_signed(matrix.scale_x, num_scale_bits);
+			//reader.read_signed(matrix.scale_y, num_scale_bits);
 		}
 		
 		reader.read(has_rotate, 1);
 		if (has_rotate) {
 			UI8 num_rotate_bits;
+			SI32 rs_0, rs_1;
+			
 			reader.read(num_rotate_bits, 5);
-			reader.read(matrix.rotate_skew_0, num_rotate_bits);
-			reader.read(matrix.rotate_skew_1, num_rotate_bits);
+			reader.read_signed(rs_0, num_rotate_bits);
+			reader.read_signed(rs_1, num_rotate_bits);
+			matrix.rotate_skew_0 = to_fixed(rs_0);
+			matrix.rotate_skew_1 = to_fixed(rs_1);
+			//matrix.rotate_skew_0 = to_fixed(reader.read_signed<UI32>(num_rotate_bits));
+			//matrix.rotate_skew_1 = to_fixed(reader.read_signed<UI32>(num_rotate_bits));
+			
+			//reader.read(matrix.rotate_skew_0, num_rotate_bits);
+			//reader.read(matrix.rotate_skew_1, num_rotate_bits);
 		}
 		
 		UI8 num_translate_bits;
